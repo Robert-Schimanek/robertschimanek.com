@@ -5,6 +5,7 @@ import BaseHead from '@/components/BaseHead.astro'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import ScrollToTop from '@/components/ScrollToTop.vue'
+import MagneticBackground from '@/components/MagneticBackground.astro'
 
 const { ...head } = Astro.props
 ---
@@ -15,15 +16,30 @@ const { ...head } = Astro.props
     <BaseHead {...head} />
     <ViewTransitions />
   </head>
-  <body class="bg-main text-main min-h-screen font-sans w-full bg-dot">
-    <Header client:load />
-    <main
-      class="grow max-w-3xl mx-auto sm:pt-36 pt-26 pb-16 px-6 relative"
-      transition:animate={fade({ duration: '0.4s' })}
-    >
-      <slot />
-      <ScrollToTop client:load />
-      <Footer />
-    </main>
+  <body class="text-main min-h-screen font-sans w-full">
+    <MagneticBackground />
+    <div id="content">
+      <Header client:load />
+      <main
+        class="grow max-w-3xl mx-auto sm:pt-36 pt-26 pb-16 px-6 relative"
+        transition:animate={fade({ duration: '0.4s' })}
+      >
+        <slot />
+        <ScrollToTop client:load />
+        <Footer />
+      </main>
+    </div>
+    <script>
+      import { magneticBackgroundStore } from '../stores/magneticBackgroundStore'
+
+      document.addEventListener('astro:after-swap', () => {
+        const canvas = document.getElementById(
+          'magnetic-canvas',
+        ) as HTMLCanvasElement
+        if (canvas) {
+          magneticBackgroundStore.init(canvas)
+        }
+      })
+    </script>
   </body>
 </html>

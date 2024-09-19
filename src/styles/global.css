@@ -62,3 +62,15 @@ html.dark::view-transition-old(root) {
 html.dark::view-transition-new(root) {
   z-index: 1;
 }
+
+body {
+  position: relative;
+  z-index: 1;
+}
+
+main,
+header,
+footer {
+  position: relative;
+  z-index: 2;
+}
