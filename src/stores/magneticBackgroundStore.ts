@@ -117,10 +117,13 @@ function createMagneticBackgroundStore() {
       update((currentBackground) => {
         if (currentBackground) {
           currentBackground.updateCanvas(canvas)
+          currentBackground.animate() // Restart animation
           return currentBackground
         }
         else {
-          return new MagneticBackground(canvas)
+          const newBackground = new MagneticBackground(canvas)
+          newBackground.animate() // Start animation
+          return newBackground
         }
       })
     },

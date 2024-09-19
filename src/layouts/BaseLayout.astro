@@ -17,8 +17,8 @@ const { ...head } = Astro.props
     <ViewTransitions />
   </head>
   <body class="text-main min-h-screen font-sans w-full">
-    <MagneticBackground />
-    <div id="content">
+    <MagneticBackground transition:persist />
+    <div id="content" class="relative z-10">
       <Header client:load />
       <main
         class="grow max-w-3xl mx-auto sm:pt-36 pt-26 pb-16 px-6 relative"
@@ -29,17 +29,6 @@ const { ...head } = Astro.props
         <Footer />
       </main>
     </div>
-    <script>
-      import { magneticBackgroundStore } from '../stores/magneticBackgroundStore'
-
-      document.addEventListener('astro:after-swap', () => {
-        const canvas = document.getElementById(
-          'magnetic-canvas',
-        ) as HTMLCanvasElement
-        if (canvas) {
-          magneticBackgroundStore.init(canvas)
-        }
-      })
-    </script>
+    <script></script>
   </body>
 </html>
