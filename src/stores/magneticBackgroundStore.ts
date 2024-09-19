@@ -100,6 +100,12 @@ class MagneticBackground {
     this.renderer.domElement = canvas
     // Don't call animate() here, as it's already running
   }
+
+  updatePointColor(color: number) {
+    const material = this.points.material as THREE.PointsMaterial
+    material.color.setHex(color)
+    material.needsUpdate = true
+  }
 }
 
 function createMagneticBackgroundStore() {
@@ -122,6 +128,14 @@ function createMagneticBackgroundStore() {
       update((currentBackground) => {
         if (currentBackground)
           currentBackground.updateCanvas(canvas)
+
+        return currentBackground
+      })
+    },
+    updatePointColor: (color: number) => {
+      update((currentBackground) => {
+        if (currentBackground)
+          currentBackground.updatePointColor(color)
 
         return currentBackground
       })

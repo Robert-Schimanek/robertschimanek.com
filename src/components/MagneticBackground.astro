@@ -7,6 +7,7 @@
 </div>
 
 <script>
+  import * as THREE from 'three'
   import { magneticBackgroundStore } from '../stores/magneticBackgroundStore'
 
   function initBackground() {
@@ -48,6 +49,33 @@
       })()
     }
   })
+
+  // Update point color based on theme
+  function updatePointColor() {
+    const isDark = document.documentElement.classList.contains('dark')
+    magneticBackgroundStore.subscribe((background: any) => {
+      if (background && 'points' in background) {
+        const material = background.points.material as THREE.PointsMaterial
+        material.color.setHex(isDark ? 0xffffff : 0x000000)
+      }
+    })()
+  }
+
+  // Initial color update
+  updatePointColor()
+
+  // Update color when theme changes
+  document.addEventListener('astro:after-swap', updatePointColor)
+
+  // Listen for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        updatePointColor()
+      }
+    })
+  })
+  observer.observe(document.documentElement, { attributes: true })
 </script>
 
 <style>
