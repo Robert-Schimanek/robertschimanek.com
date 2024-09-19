@@ -6,8 +6,9 @@ import vue from '@astrojs/vue'
 
 export default defineConfig({
   site: 'https://robertschimanek.com/',
+  output: 'static',
   server: {
-    port: 1977,
+    port: 1986,
   },
   integrations: [
     mdx(),
