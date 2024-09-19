@@ -2,7 +2,7 @@
 
 ---
 
-<div id="magnetic-background" class="fixed inset-0 -z-10">
+<div id="magnetic-background" class="fixed inset-0 -z-10" transition:persist>
   <canvas id="magnetic-canvas"></canvas>
 </div>
 
@@ -57,6 +57,8 @@
       if (background && 'points' in background) {
         const material = background.points.material as THREE.PointsMaterial
         material.color.setHex(isDark ? 0xffffff : 0x000000)
+        material.opacity = background.pointOpacity
+        material.needsUpdate = true
       }
     })()
   }
@@ -86,3 +88,26 @@
     height: 100%;
   }
 </style>
+
+<script>
+  import { magneticBackgroundStore } from '../stores/magneticBackgroundStore'
+
+  function updateBackground() {
+    const canvas = document.getElementById(
+      'magnetic-canvas',
+    ) as HTMLCanvasElement
+    if (canvas) {
+      magneticBackgroundStore.subscribe((background) => {
+        if (background && 'updateCanvas' in background) {
+          background.updateCanvas(canvas)
+        }
+      })()
+    }
+  }
+
+  // Update on initial load
+  document.addEventListener('DOMContentLoaded', updateBackground)
+
+  // Update on route changes
+  document.addEventListener('astro:after-swap', updateBackground)
+</script>

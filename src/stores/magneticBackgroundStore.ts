@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store'
 import * as THREE from 'three'
 
-const GRID_SIZE = 100
-const POINT_SIZE = 0.002
-const FIELD_STRENGTH = 0.05
+const GRID_SIZE = 50
+const POINT_SIZE = 0.001
+const FIELD_STRENGTH = 0.003
 
 class MagneticBackground {
   renderer: THREE.WebGLRenderer
@@ -11,10 +11,12 @@ class MagneticBackground {
   scene: THREE.Scene
   camera: THREE.PerspectiveCamera
   animationId: number | null = null
+  pointOpacity: number = 0.6
 
-  constructor(canvas: HTMLCanvasElement) {
+  constructor(canvas: HTMLCanvasElement, opacity: number = this.pointOpacity) {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000)
+    this.pointOpacity = opacity // Use the opacity parameter
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true })
     this.renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -47,6 +49,8 @@ class MagneticBackground {
     const material = new THREE.PointsMaterial({
       size: POINT_SIZE,
       color: 0xFFFFFF,
+      transparent: true,
+      opacity: this.pointOpacity,
     })
     this.points = new THREE.Points(geometry, material)
     this.scene.add(this.points)
@@ -58,7 +62,7 @@ class MagneticBackground {
   }
 
   setupCamera() {
-    this.camera.position.z = 2
+    this.camera.position.z = 1.4
   }
 
   animate() {
@@ -73,10 +77,10 @@ class MagneticBackground {
       const angle = Math.atan2(y, x)
       const distance = Math.sqrt(x * x + y * y)
 
-      positions[i + 2] = Math.sin(distance * 10 - time) * 0.1
+      positions[i + 2] = Math.sin(distance * 10 - time) * 0.4
 
-      positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.01
-      positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.01
+      positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
+      positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
 
       if (Math.abs(positions[i]) > 0.75)
         positions[i] *= -1
@@ -97,8 +101,10 @@ class MagneticBackground {
 
   updateCanvas(canvas: HTMLCanvasElement) {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.domElement = canvas
-    // Don't call animate() here, as it's already running
+    this.camera.aspect = window.innerWidth / window.innerHeight
+    this.camera.updateProjectionMatrix()
   }
 
   updatePointColor(color: number) {
