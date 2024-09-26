@@ -2,7 +2,12 @@
 
 ---
 
-<div id="magnetic-background" class="fixed inset-0 -z-10" transition:persist>
+<div
+  id="magnetic-background"
+  class="fixed inset-0 -z-10"
+  transition:persist
+  style="view-transition-name: magnetic-background;"
+>
   <canvas id="magnetic-canvas"></canvas>
 </div>
 
@@ -42,11 +47,7 @@
       'magnetic-canvas',
     ) as HTMLCanvasElement
     if (canvas) {
-      magneticBackgroundStore.subscribe((background: any) => {
-        if (background && 'updateCanvas' in background) {
-          background.updateCanvas(canvas)
-        }
-      })()
+      magneticBackgroundStore.updateCanvas(canvas)
     }
   })
 

@@ -74,3 +74,35 @@ footer {
   position: relative;
   z-index: 2;
 }
+
+::view-transition-old(magnetic-background),
+::view-transition-new(magnetic-background) {
+  animation-duration: 0s;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(magnetic-background) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(magnetic-background) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

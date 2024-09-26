@@ -65,32 +65,37 @@ class MagneticBackground {
     this.camera.position.z = 1.4
   }
 
-  animate() {
-    this.animationId = requestAnimationFrame(() => this.animate())
+  animate = () => {
+    const animateFrame = () => {
+      this.animationId = requestAnimationFrame(animateFrame)
 
-    const time = performance.now() * 0.001
-    const positions = this.points.geometry.attributes.position.array
+      const time = performance.now() * 0.001
+      const positions = this.points.geometry.attributes.position.array
 
-    for (let i = 0; i < positions.length; i += 3) {
-      const x = positions[i]
-      const y = positions[i + 1]
-      const angle = Math.atan2(y, x)
-      const distance = Math.sqrt(x * x + y * y)
+      for (let i = 0; i < positions.length; i += 3) {
+        const x = positions[i]
+        const y = positions[i + 1]
+        const angle = Math.atan2(y, x)
+        const distance = Math.sqrt(x * x + y * y)
 
-      positions[i + 2] = Math.sin(distance * 10 - time) * 0.4
+        positions[i + 2] = Math.sin(distance * 10 - time) * 0.4
 
-      positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
-      positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
+        positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
+        positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
 
-      if (Math.abs(positions[i]) > 0.75)
-        positions[i] *= -1
-      if (Math.abs(positions[i + 1]) > 0.75)
-        positions[i + 1] *= -1
+        if (Math.abs(positions[i]) > 0.75)
+          positions[i] *= -1
+        if (Math.abs(positions[i + 1]) > 0.75)
+          positions[i + 1] *= -1
+      }
+
+      this.points.geometry.attributes.position.needsUpdate = true
+
+      if (this.renderer.domElement.isConnected)
+        this.renderer.render(this.scene, this.camera)
     }
 
-    this.points.geometry.attributes.position.needsUpdate = true
-
-    this.renderer.render(this.scene, this.camera)
+    animateFrame()
   }
 
   onWindowResize() {
@@ -100,18 +105,13 @@ class MagneticBackground {
   }
 
   updateCanvas(canvas: HTMLCanvasElement) {
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-    this.renderer.setPixelRatio(window.devicePixelRatio)
-    this.renderer.domElement = canvas
-    this.camera.aspect = window.innerWidth / window.innerHeight
-    this.camera.updateProjectionMatrix()
-
-    // Cancel the existing animation frame if it exists
-    if (this.animationId !== null)
-      cancelAnimationFrame(this.animationId)
-
-    // Restart the animation loop
-    this.animate()
+    if (this.renderer.domElement !== canvas) {
+      this.renderer.setSize(window.innerWidth, window.innerHeight)
+      this.renderer.setPixelRatio(window.devicePixelRatio)
+      this.renderer.domElement = canvas
+      this.camera.aspect = window.innerWidth / window.innerHeight
+      this.camera.updateProjectionMatrix()
+    }
   }
 
   updatePointColor(color: number) {
@@ -130,12 +130,9 @@ function createMagneticBackgroundStore() {
       update((currentBackground) => {
         if (currentBackground) {
           currentBackground.updateCanvas(canvas)
-          // currentBackground.animate() // Restart animation
           return currentBackground
         }
         else {
-          // const newBackground = new MagneticBackground(canvas)
-          // newBackground.animate() // Start animation
           return new MagneticBackground(canvas)
         }
       })
