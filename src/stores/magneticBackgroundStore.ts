@@ -66,7 +66,7 @@ class MagneticBackground {
   }
 
   animate() {
-    requestAnimationFrame(() => this.animate())
+    this.animationId = requestAnimationFrame(() => this.animate())
 
     const time = performance.now() * 0.001
     const positions = this.points.geometry.attributes.position.array
@@ -105,6 +105,13 @@ class MagneticBackground {
     this.renderer.domElement = canvas
     this.camera.aspect = window.innerWidth / window.innerHeight
     this.camera.updateProjectionMatrix()
+
+    // Cancel the existing animation frame if it exists
+    if (this.animationId !== null)
+      cancelAnimationFrame(this.animationId)
+
+    // Restart the animation loop
+    this.animate()
   }
 
   updatePointColor(color: number) {
@@ -123,13 +130,13 @@ function createMagneticBackgroundStore() {
       update((currentBackground) => {
         if (currentBackground) {
           currentBackground.updateCanvas(canvas)
-          currentBackground.animate() // Restart animation
+          // currentBackground.animate() // Restart animation
           return currentBackground
         }
         else {
-          const newBackground = new MagneticBackground(canvas)
-          newBackground.animate() // Start animation
-          return newBackground
+          // const newBackground = new MagneticBackground(canvas)
+          // newBackground.animate() // Start animation
+          return new MagneticBackground(canvas)
         }
       })
     },
