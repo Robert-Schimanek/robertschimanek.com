@@ -105,7 +105,7 @@ function toggleNavDrawer() {
     </div>
   </header>
   <nav
-    class="nav-drawer sm:hidden"
+    class="nav-drawer sm:hidden" style="view-transition-name: nav-drawer;"
   >
     <i i-ri-menu-2-fill />
     <a
@@ -132,18 +132,23 @@ function toggleNavDrawer() {
   transform: translateX(-100%);
   --at-apply: box-border fixed h-screen z-999 left-0 top-0 min-w-32vw max-w-50vw
     bg-main p-6 text-lg flex flex-col gap-5 transition-all;
+  transition:
+    transform 0.2s ease-in-out,
+    background-color 0.2s ease;
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
 }
 
 .nav-drawer-mask {
   display: none;
-  --at-apply: transition-all;
+  --at-apply: transition-all bg-opacity-50;
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
   z-index: 998;
 }
 </style>
