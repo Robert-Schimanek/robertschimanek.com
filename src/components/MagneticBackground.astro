@@ -75,6 +75,11 @@
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'class') {
         updatePointColor()
+        const isDark = document.documentElement.classList.contains('dark')
+        document.documentElement.style.setProperty(
+          '--background-color',
+          isDark ? '#121212' : '#ffffff',
+        )
       }
     })
   })

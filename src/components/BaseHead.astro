@@ -44,22 +44,19 @@ function formatCanonicalURL(url: string | URL) {
 <meta name="generator" content={Astro.generator} />
 
 <script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme')
+  ;(function () {
+    if (typeof localStorage !== 'undefined') {
+      const theme = localStorage.getItem('theme')
+      const isDark =
+        theme === 'dark' ||
+        (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      document.documentElement.classList.toggle('dark', isDark)
+      document.documentElement.style.setProperty(
+        '--background-color',
+        isDark ? '#121212' : '#ffffff',
+      )
     }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark'
-    }
-    return 'light'
   })()
-
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark')
-  } else {
-    document.documentElement.classList.add('dark')
-  }
-  window.localStorage.setItem('theme', theme)
 </script>
 
 <!-- Low Priority Global Metadata -->

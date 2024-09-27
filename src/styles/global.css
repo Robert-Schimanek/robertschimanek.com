@@ -14,14 +14,21 @@ html.dark .astro-code span {
 html.dark {
   /* color-scheme: dark; */
   background-color: #121212;
+  --background-color: #121212;
   color: #ffffff;
   /* secondary: #b9b9b9; */
 }
 
 html:not(.dark) {
   background-color: #ffffff;
+  --background-color: #ffffff;
   color: #000000;
   /* color-scheme: light; */
+}
+
+body {
+  background-color: var(--background-color);
+  /* transition: background-color 0.2s ease; */
 }
 
 #nprogress {
@@ -36,7 +43,7 @@ html:not(.dark) {
   top: 0;
   left: 0;
   width: 100%;
-  height: 1px;
+  height: 0.5px;
 }
 
 img {
