@@ -12,6 +12,10 @@ class MagneticBackground {
   camera: THREE.PerspectiveCamera
   animationId: number | null = null
   pointOpacity: number = 0.6
+  mouseX: number = 0
+  mouseY: number = 0
+  repulsionRadius: number = 0.2
+  repulsionStrength: number = 0.03
 
   constructor(canvas: HTMLCanvasElement, opacity: number = this.pointOpacity) {
     this.scene = new THREE.Scene()
@@ -26,6 +30,7 @@ class MagneticBackground {
     this.animate()
 
     window.addEventListener('resize', () => this.onWindowResize())
+    window.addEventListener('mousemove', event => this.onMouseMove(event))
   }
 
   setupPoints() {
@@ -65,6 +70,12 @@ class MagneticBackground {
     this.camera.position.z = 1.4
   }
 
+  onMouseMove(event: MouseEvent) {
+    const rect = this.renderer.domElement.getBoundingClientRect()
+    this.mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1
+    this.mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1
+  }
+
   animate = () => {
     const animateFrame = () => {
       this.animationId = requestAnimationFrame(animateFrame)
@@ -82,6 +93,16 @@ class MagneticBackground {
 
         positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
         positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
+
+        // Apply repulsion from mouse
+        const dx = x - this.mouseX
+        const dy = y - this.mouseY
+        const mouseDistance = Math.sqrt(dx * dx + dy * dy)
+        if (mouseDistance < this.repulsionRadius) {
+          const repulsionFactor = (this.repulsionRadius - mouseDistance) / this.repulsionRadius
+          positions[i] += dx * repulsionFactor * this.repulsionStrength
+          positions[i + 1] += dy * repulsionFactor * this.repulsionStrength
+        }
 
         if (Math.abs(positions[i]) > 0.75)
           positions[i] *= -1
