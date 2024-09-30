@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ListPosts from '@/components/ListPosts.vue'
+import ListOrchidPosts from '@/components/ListOrchidPosts.vue'
 import siteConfig from '@/site-config'
 import { getPosts } from '@/utils/posts'
 
@@ -44,5 +45,11 @@ function activeLink(pathname: string) {
       ))
     }
   </div>
-  <ListPosts list={posts} />
+  {
+    activeLink('/blog/publications') ? (
+      <ListOrchidPosts client:load />
+    ) : (
+      <ListPosts list={posts} />
+    )
+  }
 </BaseLayout>
