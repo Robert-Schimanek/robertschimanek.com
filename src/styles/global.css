@@ -11,12 +11,27 @@ html.dark .astro-code span {
   color-scheme: light dark;
 }
 
+/* Hide scrollbar for all elements */
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
 html.dark {
   /* color-scheme: dark; */
   background-color: #121212;
   --background-color: #121212;
   color: #ffffff;
   /* secondary: #b9b9b9; */
+  /*  overflow-y: scroll;*/
+  /* scrollbar-color: rgba(255, 255, 255, 0.00001);*/
+  scrollbar-gutter: stable;
+  overflow-y: auto;
 }
 
 html:not(.dark) {
@@ -24,11 +39,15 @@ html:not(.dark) {
   --background-color: #ffffff;
   color: #000000;
   /* color-scheme: light; */
+  /* overflow-y: scroll;*/
+  /* --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);*/
+  scrollbar-gutter: stable;
 }
 
 body {
   background-color: var(--background-color);
   /* transition: background-color 0.2s ease; */
+  /* padding-right: var(--scrollbar-width); */
 }
 
 #nprogress {
