@@ -8,7 +8,7 @@ export const siteConfig = {
     src: '/hero.jpg',
     alt: 'Website Main Image',
   },
-  email: 'robert@schimanek.dev',
+  email: 'info@robertschimanek.com',
   socialLinks: [
     {
       text: 'GitHub',
