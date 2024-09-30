@@ -1,0 +1,796 @@
+{
+  "last-modified-date": {
+    "value": 1707998889656
+  },
+  "group": [
+    {
+      "last-modified-date": {
+        "value": 1707985179184
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.14279/DEPOSITONCE-19547",
+            "external-id-normalized": {
+              "value": "10.14279/depositonce-19547",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.14279/depositonce-19547"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 153212259,
+          "created-date": {
+            "value": 1707984930882
+          },
+          "last-modified-date": {
+            "value": 1707985179184
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Artificial Intelligence in Product Identification and Evaluation: Insights from Expert Interviews"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.14279/DEPOSITONCE-19547",
+                "external-id-normalized": {
+                  "value": "10.14279/depositonce-19547",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.14279/depositonce-19547"
+                },
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": {
+            "value": "https://depositonce.tu-berlin.de/handle/11303/20749"
+          },
+          "type": "data-set",
+          "publication-date": {
+            "year": {
+              "value": "2024"
+            },
+            "month": {
+              "value": "01"
+            },
+            "day": {
+              "value": "14"
+            }
+          },
+          "journal-title": null,
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/153212259",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1707998889656
+      },
+      "external-ids": {
+        "external-id": []
+      },
+      "work-summary": [
+        {
+          "put-code": 153233287,
+          "created-date": {
+            "value": 1707998889656
+          },
+          "last-modified-date": {
+            "value": 1707998889656
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Resource-efficient Circular Economy – Innovative Product Cycles (ReziProK)"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "url": {
+            "value": "https://innovative-produktkreislaeufe.de/Publikationen/_/ReziProk_Abschlusspublikation_Langfassung_2023_englisch_final%20-%20Kopie.pdf"
+          },
+          "type": "edited-book",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": {
+              "value": "11"
+            },
+            "day": null
+          },
+          "journal-title": {
+            "value": "DECHEMA Gesellschaft für Chemische Technik und Biotechnologie e.V."
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/153233287",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1690049662513
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.1007/978-3-031-10071-0_25",
+            "external-id-normalized": {
+              "value": "10.1007/978-3-031-10071-0_25",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.1007/978-3-031-10071-0_25"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 136457824,
+          "created-date": {
+            "value": 1686117580030
+          },
+          "last-modified-date": {
+            "value": 1690049662513
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Flow modeling for vacuum pressure-based handling of porous electrodes of lithium-ion batteries"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.1007/978-3-031-10071-0_25",
+                "external-id-normalized": {
+                  "value": "10.1007/978-3-031-10071-0_25",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.1007/978-3-031-10071-0_25"
+                },
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": {
+              "value": "08"
+            },
+            "day": {
+              "value": "20"
+            }
+          },
+          "journal-title": {
+            "value": "Annals of Scientific Society for Assembly, Handling and Industrial Robotics 2022."
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/136457824",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1692715432271
+      },
+      "external-ids": {
+        "external-id": []
+      },
+      "work-summary": [
+        {
+          "put-code": 140967764,
+          "created-date": {
+            "value": 1692715097213
+          },
+          "last-modified-date": {
+            "value": 1692715432271
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Assessment of carbon reduction through Al methods in inspection after reverse logistics"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": []
+          },
+          "url": null,
+          "type": "conference-paper",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": {
+            "value": "International Conference on Remanufacturing"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/140967764",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1685872121481
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.1016/j.procir.2023.02.039",
+            "external-id-normalized": {
+              "value": "10.1016/j.procir.2023.02.039",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.1016/j.procir.2023.02.039"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 136286364,
+          "created-date": {
+            "value": 1685872121481
+          },
+          "last-modified-date": {
+            "value": 1685872121481
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Automated remanufacturing of lithium-ion batteries with shear separation, ultrasonic separation, and ultrasonic welding"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.1016/j.procir.2023.02.039",
+                "external-id-normalized": {
+                  "value": "10.1016/j.procir.2023.02.039",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.1016/j.procir.2023.02.039"
+                },
+                "external-id-relationship": "self"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "2212-8271",
+                "external-id-normalized": {
+                  "value": "2212-8271",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/2212-8271"
+                },
+                "external-id-relationship": "part-of"
+              }
+            ]
+          },
+          "url": {
+            "value": "http://dx.doi.org/10.1016/j.procir.2023.02.039"
+          },
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": {
+            "value": "Procedia CIRP"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/136286364",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1693038392983
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.1504/ijsm.2023.10058051",
+            "external-id-normalized": {
+              "value": "10.1504/ijsm.2023.10058051",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.1504/ijsm.2023.10058051"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 141195336,
+          "created-date": {
+            "value": 1693038392712
+          },
+          "last-modified-date": {
+            "value": 1693038392712
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Data fusion for improved circularity through higher quality of prediction and increased reliability of inspection"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.1504/ijsm.2023.10058051",
+                "external-id-normalized": {
+                  "value": "10.1504/ijsm.2023.10058051",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.1504/ijsm.2023.10058051"
+                },
+                "external-id-relationship": "self"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "1742-7223",
+                "external-id-normalized": {
+                  "value": "1742-7223",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/1742-7223"
+                },
+                "external-id-relationship": "part-of"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "1742-7231",
+                "external-id-normalized": {
+                  "value": "1742-7231",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/1742-7231"
+                },
+                "external-id-relationship": "part-of"
+              }
+            ]
+          },
+          "url": {
+            "value": "http://dx.doi.org/10.1504/ijsm.2023.10058051"
+          },
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": {
+            "value": "International Journal of Sustainable Manufacturing"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/141195336",
+          "display-index": "1"
+        },
+        {
+          "put-code": 141195337,
+          "created-date": {
+            "value": 1693038392983
+          },
+          "last-modified-date": {
+            "value": 1693038392983
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Data fusion for improved circularity through higher quality of prediction and increased reliability of inspection"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.1504/ijsm.2023.10058051",
+                "external-id-normalized": {
+                  "value": "10.1504/ijsm.2023.10058051",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.1504/ijsm.2023.10058051"
+                },
+                "external-id-relationship": "self"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "1742-7223",
+                "external-id-normalized": {
+                  "value": "1742-7223",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/1742-7223"
+                },
+                "external-id-relationship": "part-of"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "1742-7231",
+                "external-id-normalized": {
+                  "value": "1742-7231",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/1742-7231"
+                },
+                "external-id-relationship": "part-of"
+              }
+            ]
+          },
+          "url": {
+            "value": "http://dx.doi.org/10.1504/ijsm.2023.10058051"
+          },
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": {
+            "value": "International Journal of Sustainable Manufacturing"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/141195337",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1685873371985
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.1016/j.procir.2023.02.070",
+            "external-id-normalized": {
+              "value": "10.1016/j.procir.2023.02.070",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.1016/j.procir.2023.02.070"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 136286887,
+          "created-date": {
+            "value": 1685873371985
+          },
+          "last-modified-date": {
+            "value": 1685873371985
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Green incremental learning - Energy efficient ramp-up for AI-enhanced part recognition in reverse logistics"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.1016/j.procir.2023.02.070",
+                "external-id-normalized": {
+                  "value": "10.1016/j.procir.2023.02.070",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.1016/j.procir.2023.02.070"
+                },
+                "external-id-relationship": "self"
+              },
+              {
+                "external-id-type": "issn",
+                "external-id-value": "2212-8271",
+                "external-id-normalized": {
+                  "value": "2212-8271",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://portal.issn.org/resource/ISSN/2212-8271"
+                },
+                "external-id-relationship": "part-of"
+              }
+            ]
+          },
+          "url": {
+            "value": "http://dx.doi.org/10.1016/j.procir.2023.02.070"
+          },
+          "type": "journal-article",
+          "publication-date": {
+            "year": {
+              "value": "2023"
+            },
+            "month": null,
+            "day": null
+          },
+          "journal-title": {
+            "value": "Procedia CIRP"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/136286887",
+          "display-index": "1"
+        }
+      ]
+    },
+    {
+      "last-modified-date": {
+        "value": 1686117833907
+      },
+      "external-ids": {
+        "external-id": [
+          {
+            "external-id-type": "doi",
+            "external-id-value": "10.36227/techrxiv.23284049.v1",
+            "external-id-normalized": {
+              "value": "10.36227/techrxiv.23284049.v1",
+              "transient": true
+            },
+            "external-id-normalized-error": null,
+            "external-id-url": {
+              "value": "https://doi.org/10.36227/techrxiv.23284049.v1"
+            },
+            "external-id-relationship": "self"
+          }
+        ]
+      },
+      "work-summary": [
+        {
+          "put-code": 136457963,
+          "created-date": {
+            "value": 1686117833907
+          },
+          "last-modified-date": {
+            "value": 1686117833907
+          },
+          "source": {
+            "source-orcid": {
+              "uri": "https://orcid.org/0000-0002-4227-4080",
+              "path": "0000-0002-4227-4080",
+              "host": "orcid.org"
+            },
+            "source-client-id": null,
+            "source-name": {
+              "value": "Robert Schimanek"
+            },
+            "assertion-origin-orcid": null,
+            "assertion-origin-client-id": null,
+            "assertion-origin-name": null
+          },
+          "title": {
+            "title": {
+              "value": "Inspection in high-mix and high-throughput handling with skeptical and incremental learning"
+            },
+            "subtitle": null,
+            "translated-title": null
+          },
+          "external-ids": {
+            "external-id": [
+              {
+                "external-id-type": "doi",
+                "external-id-value": "10.36227/techrxiv.23284049.v1",
+                "external-id-normalized": {
+                  "value": "10.36227/techrxiv.23284049.v1",
+                  "transient": true
+                },
+                "external-id-normalized-error": null,
+                "external-id-url": {
+                  "value": "https://doi.org/10.36227/techrxiv.23284049.v1"
+                },
+                "external-id-relationship": "self"
+              }
+            ]
+          },
+          "url": {
+            "value": "https://doi.org/10.36227/techrxiv.23284049.v1"
+          },
+          "type": "conference-paper",
+          "publication-date": null,
+          "journal-title": {
+            "value": "Annals of Scientific Society for Assembly, Handling and Industrial Robotics 2023"
+          },
+          "visibility": "public",
+          "path": "/0000-0002-4227-4080/work/136457963",
+          "display-index": "1"
+        }
+      ]
+    }
+  ],
+  "path": "/0000-0002-4227-4080/works"
+}
