@@ -26,6 +26,38 @@ export default defineConfig({
     {
       'hr-line': 'w-14 mx-auto my-8 border-solid border-1px !border-truegray-200 !dark:border-truegray-800',
     },
+    {
+      'year-background': 'text-7em text-[rgba(170,170,170,0.001)] absolute top--0.2em',
+      'year-background-bold': 'text-[rgba(170,170,170,0.14)]',
+      'year-background-simple': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
+      'year-background-bold-simple': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
+      'year-background-outline': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
+      'year-background-outline-bold': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
+      'year-background-background-clip': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
+      'year-background-background-clip-bold': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
+    },
+  ],
+  theme: {
+    extend: {
+      textShadow: {
+        year: '-2px -2px 0 rgba(170,170,170,0.14), 2px -2px 0 rgba(170,170,170,0.14), -2px 2px 0 rgba(170,170,170,0.14), 2px 2px 0 rgba(170,170,170,0.14)',
+      },
+    },
+  },
+  rules: [
+    ['year-typography', {
+      'font-family': '"Kras", sans-serif',
+      'font-weight': '900',
+      'letter-spacing': '-0.02em',
+    }],
+    ['text-shadow-year', {
+      'color': '#ffffff dark:#121212',
+      'text-shadow': '-2px -2px 0 rgba(170,170,170,0.14), 2px -2px 0 rgba(170,170,170,0.14), -2px 2px 0 rgba(170,170,170,0.14), 2px 2px 0 rgba(170,170,170,0.14)',
+    }],
+    ['text-outline-year', {
+      '-webkit-text-fill-color': 'bg-main',
+      '-webkit-text-stroke': '2px rgba(170,170,170,0.14)',
+    }],
   ],
   presets: [
     presetUno(),
@@ -42,6 +74,9 @@ export default defineConfig({
       fonts: {
         sans: 'Inter:400,600,800',
         mono: 'DM Mono:400,600',
+        noto: 'Noto Sans:400,700',
+        montserrat: 'Montserrat:400,700',
+        rajdhani: 'Rajdhani:400,700',
       },
     }),
   ],
@@ -49,6 +84,8 @@ export default defineConfig({
   safelist: [
     'i-ri-file-list-2-line',
     'i-carbon-campsite',
+    'i-carbon-forecast-lightning',
+    // social icons
     'i-simple-icons-github',
     'i-simple-icons-x',
     'i-simple-icons-linkedin',
