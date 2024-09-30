@@ -41,15 +41,31 @@
     }
   })
 
-  // Update canvas reference after route changes
-  document.addEventListener('astro:after-swap', () => {
+  // Update canvas reference and handle route-specific changes
+  function updateBackground() {
     const canvas = document.getElementById(
       'magnetic-canvas',
     ) as HTMLCanvasElement
     if (canvas) {
-      magneticBackgroundStore.updateCanvas(canvas)
+      magneticBackgroundStore.subscribe((background) => {
+        if (background && 'updateCanvas' in background) {
+          background.updateCanvas(canvas)
+
+          // Check if we're on the /blog/notes route
+          if (
+            window.location.pathname === '/blog/notes' &&
+            'createAdditionalParticles' in background
+          ) {
+            background.createAdditionalParticles()
+          }
+        }
+      })()
     }
-  })
+  }
+
+  // Update on initial load and route changes
+  document.addEventListener('DOMContentLoaded', updateBackground)
+  document.addEventListener('astro:after-swap', updateBackground)
 
   // Update point color based on theme
   function updatePointColor() {
@@ -85,6 +101,7 @@
   })
   observer.observe(document.documentElement, { attributes: true })
 </script>
+
 <style>
   #magnetic-background {
     pointer-events: none;

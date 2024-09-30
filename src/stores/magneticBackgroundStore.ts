@@ -1,3 +1,4 @@
+import { keys } from 'lodash-es'
 import { writable } from 'svelte/store'
 import * as THREE from 'three'
 
@@ -174,6 +175,38 @@ class MagneticBackground {
     material.color.setHex(color)
     material.needsUpdate = true
   }
+
+  createAdditionalParticles() {
+    const currentPositions = this.points.geometry.attributes.position.array as Float32Array
+    const newPositions = new Float32Array(currentPositions.length * 2)
+
+    // Copy existing particles
+    newPositions.set(currentPositions)
+
+    // Add new particles with x = y, z = 0
+    for (let i = currentPositions.length; i < newPositions.length; i += 3) {
+      const x = Math.random() * 1.5 - 0.75
+      const k = 1 / Math.sqrt(2 * Math.PI)
+      newPositions[i] = x
+      newPositions[i + 1] = k * Math.exp((-1 * x ** 2) / 2)
+      newPositions[i + 2] = 0
+    }
+
+    const newGeometry = new THREE.BufferGeometry()
+    newGeometry.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3))
+
+    const newMaterial = new THREE.PointsMaterial({
+      size: POINT_SIZE,
+      color: (this.points.material as THREE.PointsMaterial).color,
+      transparent: true,
+      opacity: this.pointOpacity,
+    })
+
+    const newPoints = new THREE.Points(newGeometry, newMaterial)
+    this.scene.remove(this.points)
+    this.scene.add(newPoints)
+    this.points = newPoints
+  }
 }
 
 function createMagneticBackgroundStore() {
@@ -209,6 +242,13 @@ function createMagneticBackgroundStore() {
       })
     },
     destroy: () => set(null),
+    createAdditionalParticles: () => {
+      update((currentBackground) => {
+        if (currentBackground)
+          currentBackground.createAdditionalParticles()
+        return currentBackground
+      })
+    },
   }
 }
 
