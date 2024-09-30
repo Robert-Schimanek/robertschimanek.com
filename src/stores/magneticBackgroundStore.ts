@@ -14,8 +14,11 @@ class MagneticBackground {
   pointOpacity: number = 0.6
   mouseX: number = 0
   mouseY: number = 0
-  repulsionRadius: number = 0.2
+  repulsionRadius: number = 0.1
   repulsionStrength: number = 0.03
+  touchRepulsionStrength: number = 0.2 // New property for touch repulsion
+  private lastTouchX: number | null = null
+  private lastTouchY: number | null = null
 
   constructor(canvas: HTMLCanvasElement, opacity: number = this.pointOpacity) {
     this.scene = new THREE.Scene()
@@ -31,6 +34,9 @@ class MagneticBackground {
 
     window.addEventListener('resize', () => this.onWindowResize())
     window.addEventListener('mousemove', event => this.onMouseMove(event))
+    window.addEventListener('touchstart', event => this.onTouchStart(event))
+    window.addEventListener('touchmove', event => this.onTouchMove(event))
+    window.addEventListener('touchend', () => this.onTouchEnd())
   }
 
   setupPoints() {
@@ -71,9 +77,34 @@ class MagneticBackground {
   }
 
   onMouseMove(event: MouseEvent) {
+    this.updateInputPosition(event.clientX, event.clientY)
+  }
+
+  private onTouchStart(event: TouchEvent) {
+    if (event.touches.length === 1) {
+      const touch = event.touches[0]
+      this.updateInputPosition(touch.clientX, touch.clientY)
+    }
+  }
+
+  private onTouchMove(event: TouchEvent) {
+    if (event.touches.length === 1) {
+      const touch = event.touches[0]
+      this.updateInputPosition(touch.clientX, touch.clientY)
+    }
+  }
+
+  private onTouchEnd() {
+    this.lastTouchX = null
+    this.lastTouchY = null
+  }
+
+  private updateInputPosition(clientX: number, clientY: number) {
     const rect = this.renderer.domElement.getBoundingClientRect()
-    this.mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1
-    this.mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1
+    this.mouseX = ((clientX - rect.left) / rect.width) * 2 - 1
+    this.mouseY = -((clientY - rect.top) / rect.height) * 2 + 1
+    this.lastTouchX = this.mouseX
+    this.lastTouchY = this.mouseY
   }
 
   animate = () => {
@@ -94,14 +125,17 @@ class MagneticBackground {
         positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
         positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
 
-        // Apply repulsion from mouse
-        const dx = x - this.mouseX
-        const dy = y - this.mouseY
-        const mouseDistance = Math.sqrt(dx * dx + dy * dy)
-        if (mouseDistance < this.repulsionRadius) {
-          const repulsionFactor = (this.repulsionRadius - mouseDistance) / this.repulsionRadius
-          positions[i] += dx * repulsionFactor * this.repulsionStrength
-          positions[i + 1] += dy * repulsionFactor * this.repulsionStrength
+        // Apply repulsion from mouse or touch
+        const inputX = this.lastTouchX !== null ? this.lastTouchX : this.mouseX
+        const inputY = this.lastTouchY !== null ? this.lastTouchY : this.mouseY
+        const dx = x - inputX
+        const dy = y - inputY
+        const inputDistance = Math.sqrt(dx * dx + dy * dy)
+        if (inputDistance < this.repulsionRadius) {
+          const repulsionFactor = (this.repulsionRadius - inputDistance) / this.repulsionRadius
+          const currentRepulsionStrength = this.lastTouchX !== null ? this.touchRepulsionStrength : this.repulsionStrength
+          positions[i] += dx * repulsionFactor * currentRepulsionStrength
+          positions[i + 1] += dy * repulsionFactor * currentRepulsionStrength
         }
 
         if (Math.abs(positions[i]) > 0.75)
