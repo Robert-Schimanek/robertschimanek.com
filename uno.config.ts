@@ -84,7 +84,12 @@ export default defineConfig({
   safelist: [
     'i-ri-file-list-2-line',
     'i-carbon-campsite',
+    // project icons
+    'i-material-symbols-electric-car',
     'i-carbon-forecast-lightning',
+    'i-carbon-battery-charging',
+    'i-wi-forecast-io-partly-cloudy-day',
+    'i-mdi-home-energy-outline',
     // social icons
     'i-simple-icons-github',
     'i-simple-icons-x',
