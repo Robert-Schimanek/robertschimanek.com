@@ -15,14 +15,33 @@ const { ...head } = Astro.props
   <head>
     <BaseHead {...head} />
     <ViewTransitions />
+    <script>
+      // This script will run as soon as it's encountered
+      ;(function () {
+        function applyTheme() {
+          const theme = localStorage.getItem('theme')
+          document.documentElement.classList.toggle('dark', theme === 'dark')
+          document.documentElement.style.setProperty(
+            '--background-color',
+            theme === 'dark' ? '#121212' : '#ff8800',
+          )
+        }
+
+        // Apply theme immediately
+        applyTheme()
+
+        // Re-apply theme after View Transitions
+        document.addEventListener('astro:after-swap', applyTheme)
+      })()
+    </script>
   </head>
-  <body class="text-main min-h-screen font-sans w-full">
+  <body class="text-main min-h-screen font-sans w-full bg-main">
     <MagneticBackground transition:persist />
     <div id="content" class="relative z-10">
       <Header client:load />
       <main
         class="grow max-w-3xl mx-auto sm:pt-36 pt-26 pb-16 px-6 relative"
-        transition:animate={fade({ duration: '1.5s' })}
+        transition:animate={fade({ duration: '0.8s' })}
       >
         <slot />
         <ScrollToTop client:load />
