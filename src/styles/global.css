@@ -24,8 +24,6 @@ html.dark .astro-code span {
 
 html.dark {
   /* color-scheme: dark; */
-  background-color: #121212;
-  --background-color: #121212;
   color: #ffffff;
   /* secondary: #b9b9b9; */
   /*  overflow-y: scroll;*/
@@ -35,19 +33,11 @@ html.dark {
 }
 
 html:not(.dark) {
-  background-color: #ffffff;
-  --background-color: #ffffff;
   color: #000000;
   /* color-scheme: light; */
   /* overflow-y: scroll;*/
   /* --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);*/
   scrollbar-gutter: stable;
-}
-
-body {
-  background-color: var(--background-color);
-  /* transition: background-color 0.2s ease; */
-  /* padding-right: var(--scrollbar-width); */
 }
 
 #nprogress {
