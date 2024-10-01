@@ -12,7 +12,8 @@ import {
 export default defineConfig({
   shortcuts: [
     {
-      'bg-main': 'bg-hex-eef5fc dark:bg-hex-0d1117',
+      'bg-main': 'bg-hex-ffffff dark:bg-hex-121212',
+      'bg-drawer': 'bg-hex-ffffff dark:bg-hex-121212',
       'text-main': 'text-hex-555555 dark:text-hex-bbbbbb',
       'text-link': 'text-dark dark:text-white ',
       'border-main': 'border-truegray-300 dark:border-truegray-600',
@@ -28,13 +29,6 @@ export default defineConfig({
     },
     {
       'year-background': 'text-7em text-[rgba(170,170,170,0.001)] absolute top--0.2em',
-      'year-background-bold': 'text-[rgba(170,170,170,0.14)]',
-      'year-background-simple': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
-      'year-background-bold-simple': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
-      'year-background-outline': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
-      'year-background-outline-bold': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
-      'year-background-background-clip': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em',
-      'year-background-background-clip-bold': 'text-7em text-[rgba(170,170,170,0.14)] absolute top--0.2em font-bold',
     },
   ],
   theme: {
