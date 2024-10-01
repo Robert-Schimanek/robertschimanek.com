@@ -58,7 +58,7 @@
       if (background && 'points' in background) {
         const material = background.points.material as THREE.PointsMaterial
         material.color.setHex(isDark ? 0xffffff : 0x000000)
-        material.opacity = background.pointOpacity
+        material.opacity = isDark ? 0.5 : 0.8
         material.needsUpdate = true
       }
     })()
@@ -75,11 +75,6 @@
     mutations.forEach((mutation) => {
       if (mutation.attributeName === 'class') {
         updatePointColor()
-        const isDark = document.documentElement.classList.contains('dark')
-        document.documentElement.style.setProperty(
-          '--background-color',
-          isDark ? '#121212' : '#ffffff',
-        )
       }
     })
   })
