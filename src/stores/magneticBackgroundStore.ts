@@ -20,6 +20,13 @@ class MagneticBackground {
   touchRepulsionStrength: number = 0.2 // New property for touch repulsion
   private lastTouchX: number | null = null
   private lastTouchY: number | null = null
+  staticPoints: THREE.Points | null = null
+  staticPlaneZ: number = -0.5 // Z-coordinate for the static plane
+  particleAGoals: Float32Array | null = null
+  particleAProgress: Float32Array | null = null
+  isMovingToB: boolean = false
+  movementDuration: number = 5000 // 5 seconds for the movement
+  movementStartTime: number | null = null
 
   constructor(canvas: HTMLCanvasElement, opacity: number = this.pointOpacity) {
     this.scene = new THREE.Scene()
@@ -113,36 +120,55 @@ class MagneticBackground {
       this.animationId = requestAnimationFrame(animateFrame)
 
       const time = performance.now() * 0.001
-      const positions = this.points.geometry.attributes.position.array
+      const positions = this.points.geometry.attributes.position.array as Float32Array
 
-      for (let i = 0; i < positions.length; i += 3) {
-        const x = positions[i]
-        const y = positions[i + 1]
-        const angle = Math.atan2(y, x)
-        const distance = Math.sqrt(x * x + y * y)
+      if (this.isMovingToB && this.particleAGoals && this.movementStartTime) {
+        const elapsedTime = performance.now() - this.movementStartTime
+        const progress = Math.min(elapsedTime / this.movementDuration, 1)
 
-        positions[i + 2] = Math.sin(distance * 10 - time) * 0.4
+        for (let i = 0; i < positions.length; i += 3) {
+          const index = i / 3
+          this.particleAProgress[index] = progress
 
-        positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
-        positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
-
-        // Apply repulsion from mouse or touch
-        const inputX = this.lastTouchX !== null ? this.lastTouchX : this.mouseX
-        const inputY = this.lastTouchY !== null ? this.lastTouchY : this.mouseY
-        const dx = x - inputX
-        const dy = y - inputY
-        const inputDistance = Math.sqrt(dx * dx + dy * dy)
-        if (inputDistance < this.repulsionRadius) {
-          const repulsionFactor = (this.repulsionRadius - inputDistance) / this.repulsionRadius
-          const currentRepulsionStrength = this.lastTouchX !== null ? this.touchRepulsionStrength : this.repulsionStrength
-          positions[i] += dx * repulsionFactor * currentRepulsionStrength
-          positions[i + 1] += dy * repulsionFactor * currentRepulsionStrength
+          positions[i] = THREE.MathUtils.lerp(positions[i], this.particleAGoals[i], progress * 0.1)
+          positions[i + 1] = THREE.MathUtils.lerp(positions[i + 1], this.particleAGoals[i + 1], progress * 0.1)
+          positions[i + 2] = THREE.MathUtils.lerp(positions[i + 2], this.particleAGoals[i + 2], progress * 0.1)
         }
 
-        if (Math.abs(positions[i]) > 0.75)
-          positions[i] *= -1
-        if (Math.abs(positions[i + 1]) > 0.75)
-          positions[i + 1] *= -1
+        if (progress === 1)
+          this.isMovingToB = false
+      }
+      else {
+        // Original animation logic
+        for (let i = 0; i < positions.length; i += 3) {
+          const x = positions[i]
+          const y = positions[i + 1]
+          const angle = Math.atan2(y, x)
+          const distance = Math.sqrt(x * x + y * y)
+
+          positions[i + 2] = Math.sin(distance * 10 - time) * 0.4
+
+          positions[i] += Math.cos(angle) * FIELD_STRENGTH * 0.005
+          positions[i + 1] += Math.sin(angle) * FIELD_STRENGTH * 0.08
+
+          // Apply repulsion from mouse or touch
+          const inputX = this.lastTouchX !== null ? this.lastTouchX : this.mouseX
+          const inputY = this.lastTouchY !== null ? this.lastTouchY : this.mouseY
+          const dx = x - inputX
+          const dy = y - inputY
+          const inputDistance = Math.sqrt(dx * dx + dy * dy)
+          if (inputDistance < this.repulsionRadius) {
+            const repulsionFactor = (this.repulsionRadius - inputDistance) / this.repulsionRadius
+            const currentRepulsionStrength = this.lastTouchX !== null ? this.touchRepulsionStrength : this.repulsionStrength
+            positions[i] += dx * repulsionFactor * currentRepulsionStrength
+            positions[i + 1] += dy * repulsionFactor * currentRepulsionStrength
+          }
+
+          if (Math.abs(positions[i]) > 0.75)
+            positions[i] *= -1
+          if (Math.abs(positions[i + 1]) > 0.75)
+            positions[i + 1] *= -1
+        }
       }
 
       this.points.geometry.attributes.position.needsUpdate = true
@@ -177,35 +203,50 @@ class MagneticBackground {
   }
 
   createAdditionalParticles() {
+    if (this.staticPoints)
+      return
+
     const currentPositions = this.points.geometry.attributes.position.array as Float32Array
-    const newPositions = new Float32Array(currentPositions.length * 2)
+    const newPositions = new Float32Array(currentPositions.length)
 
-    // Copy existing particles
-    newPositions.set(currentPositions)
-
-    // Add new particles with x = y, z = 0
-    for (let i = currentPositions.length; i < newPositions.length; i += 3) {
-      const x = Math.random() * 1.5 - 0.75
+    const μ = Math.random() * 0.8 - 0.4
+    // Create new static particles (Set B)
+    for (let i = 0; i < newPositions.length; i += 3) {
+      const σ = 0.3
+      const x = Math.random() * 10 - 5
       const k = 1 / Math.sqrt(2 * Math.PI)
       newPositions[i] = x
-      newPositions[i + 1] = k * Math.exp((-1 * x ** 2) / 2)
-      newPositions[i + 2] = 0
+      newPositions[i + 1] = k * Math.exp((-1 * (x - μ) ** 2) / (2 * σ ** 2))
+      newPositions[i + 2] = this.staticPlaneZ
     }
 
-    const newGeometry = new THREE.BufferGeometry()
-    newGeometry.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3))
+    const staticGeometry = new THREE.BufferGeometry()
+    staticGeometry.setAttribute('position', new THREE.Float32BufferAttribute(newPositions, 3))
 
-    const newMaterial = new THREE.PointsMaterial({
+    const staticMaterial = new THREE.PointsMaterial({
       size: POINT_SIZE,
       color: (this.points.material as THREE.PointsMaterial).color,
       transparent: true,
-      opacity: this.pointOpacity,
+      opacity: this.pointOpacity * 0.0001,
     })
 
-    const newPoints = new THREE.Points(newGeometry, newMaterial)
-    this.scene.remove(this.points)
-    this.scene.add(newPoints)
-    this.points = newPoints
+    this.staticPoints = new THREE.Points(staticGeometry, staticMaterial)
+    this.scene.add(this.staticPoints)
+
+    // Set up movement of particles A to B
+    this.particleAGoals = new Float32Array(currentPositions.length)
+    this.particleAProgress = new Float32Array(currentPositions.length / 3).fill(0)
+
+    // Assign random goals for each particle A
+    for (let i = 0; i < currentPositions.length; i += 3) {
+      const randomIndex = Math.floor(Math.random() * (newPositions.length / 3)) * 3
+      this.particleAGoals[i] = newPositions[randomIndex]
+      this.particleAGoals[i + 1] = newPositions[randomIndex + 1]
+      this.particleAGoals[i + 2] = newPositions[randomIndex + 2]
+    }
+
+    this.isMovingToB = true
+    this.movementStartTime = performance.now()
   }
 }
 
