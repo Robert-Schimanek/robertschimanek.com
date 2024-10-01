@@ -11,7 +11,7 @@ class MagneticBackground {
   scene: THREE.Scene
   camera: THREE.PerspectiveCamera
   animationId: number | null = null
-  pointOpacity: number = 0.6
+  pointOpacity: number = 0.5
   mouseX: number = 0
   mouseY: number = 0
   repulsionRadius: number = 0.1
