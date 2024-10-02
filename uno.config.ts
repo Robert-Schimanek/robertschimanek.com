@@ -23,6 +23,7 @@ export default defineConfig({
       'nav-link': 'text-link opacity-70 hover:opacity-100 transition-opacity duration-200 cursor-pointer',
       'prose-link': 'text-link text-nowrap cursor-pointer border-b-1 !border-opacity-30 hover:!border-opacity-100 border-neutral-500 hover:border-truegray-600 dark:border-neutral-500 hover:dark:border-truegray-400 transition-border-color duration-200 decoration-none',
       'container-link': 'p-2 opacity-60 hover:opacity-100 cursor-pointer hover:bg-truegray-500 !bg-opacity-10 transition-colors transition-opacity duration-200',
+      'container-project-icon': 'p-2 opacity-60 hover:opacity-100 cursor-pointer hover:bg-truegray-500 !bg-opacity-10 transition-colors transition-opacity duration-200',
     },
     {
       'hr-line': 'w-14 mx-auto my-8 border-solid border-1px !border-truegray-200 !dark:border-truegray-800',
@@ -76,6 +77,7 @@ export default defineConfig({
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   safelist: [
+    // https://icon-sets.iconify.design
     'i-ri-file-list-2-line',
     'i-carbon-campsite',
     // project icons
@@ -84,6 +86,70 @@ export default defineConfig({
     'i-carbon-battery-charging',
     'i-wi-forecast-io-partly-cloudy-day',
     'i-mdi-home-energy-outline',
+    'i-mdi-solar-power',
+
+    // Language icons
+    'i-simple-icons-c',
+    'i-simple-icons-cplusplus',
+    'i-simple-icons-python',
+    'i-simple-icons-javascript',
+    'i-simple-icons-typescript',
+    'i-simple-icons-html5',
+    'i-simple-icons-latex',
+    'i-devicon-plain-matlab',
+    'i-simple-icons-mysql', // Added for SQL
+
+    // Framework icons
+    'i-simple-icons-tensorflow',
+    'i-simple-icons-pytorch',
+    'i-simple-icons-scipy',
+    'i-akar-icons-vue-fill',
+    'i-simple-icons-pandas',
+    'i-simple-icons-numpy',
+    'i-simple-icons-fastapi',
+    'i-simple-icons-flask',
+    'i-simple-icons-keras',
+    'i-simple-icons-opencv',
+    'i-simple-icons-celery',
+    'i-simple-icons-mqtt',
+    'i-simple-icons-nodered',
+    'i-simple-icons-astro',
+    'i-simple-icons-unocss',
+    'i-simple-icons-lodash',
+
+    // Software icons
+    'i-simple-icons-microsoftexcel',
+    'i-simple-icons-microsoftpowerpoint',
+    'i-simple-icons-finalcutpro', // Not found yet
+
+    // Technology icons
+    'i-simple-icons-cfdtools',
+    'i-simple-icons-dem',
+    'i-simple-icons-espressif',
+    'i-simple-icons-arduino',
+    'i-simple-icons-linux',
+    'i-simple-icons-docker',
+    'i-simple-icons-git',
+    'i-simple-icons-mongodb',
+    'i-simple-icons-redis',
+    'i-simple-icons-autodesk',
+    'i-teenyicons-azure-solid',
+    'i-simple-icons-shelly',
+    'i-simple-icons-espruino', // Not found yet
+    'i-simple-icons-homeassistant',
+    'i-simple-icons-grafana',
+    'i-simple-icons-influxdb',
+    'i-hugeicons-web-design-01',
+    'i-simple-icons-mdx',
+    'i-simple-icons-rss',
+    'i-mdi-sitemap-outline',
+    'i-logos-threejs',
+    'i-simple-icons-eslint',
+    'i-simple-icons-prettier',
+    'i-simple-icons-nprogress',
+
+    // Ideas and Principles
+
     // social icons
     'i-simple-icons-github',
     'i-simple-icons-x',
@@ -95,5 +161,8 @@ export default defineConfig({
     'i-simple-icons-sinaweibo',
     'i-ri-github-line',
     'i-ri-twitter-x-line',
+
+    // Theme icons
+    'i-heroicons-solid-menu-alt-4',
   ],
 })

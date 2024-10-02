@@ -8,6 +8,11 @@ export type Pages = 'pages'
 
 export type CollectionPages = CollectionEntry<Pages>
 
+export interface Technology {
+  name: string
+  icon: string
+}
+
 export type ProjectData = Array<{
   title: string
   projects: Array<{
@@ -15,5 +20,6 @@ export type ProjectData = Array<{
     description?: string
     icon?: string
     href: string
+    technologies?: Technology[]
   }>
 }>
