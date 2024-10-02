@@ -34,6 +34,15 @@ const { ...head } = Astro.props
         document.addEventListener('astro:after-swap', applyTheme)
       })()
     </script>
+    <script>
+      import { fetchOrcidPublications } from '@/utils/orchidRecords'
+
+      document.addEventListener('astro:page-load', async () => {
+        if (!localStorage.getItem('orcidPublications')) {
+          await fetchOrcidPublications()
+        }
+      })
+    </script>
   </head>
   <body class="text-main min-h-screen font-sans w-full bg-main">
     <MagneticBackground transition:persist />

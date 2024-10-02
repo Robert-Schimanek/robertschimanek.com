@@ -3,6 +3,9 @@ const ORCID_API_URL = `https://pub.orcid.org/v3.0/${ORCID_ID}/works`
 
 export async function fetchOrcidPublications() {
   // console.log('Fetching ORCID publications...')
+  const cachedData = localStorage.getItem('orcidPublications')
+  if (cachedData)
+    return JSON.parse(cachedData)
   try {
     const response = await fetch(ORCID_API_URL, {
       headers: {
@@ -24,6 +27,7 @@ export async function fetchOrcidPublications() {
     }
 
     // console.log(`Found ${data.group.length} publications`)
+    localStorage.setItem('orcidPublications', JSON.stringify(data.group))
     return data.group
   }
   catch (error) {

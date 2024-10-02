@@ -9,7 +9,14 @@ const error = ref<string | null>(null)
 onMounted(async () => {
   // console.log('ListOrchidPosts component mounted')
   try {
-    publications.value = await fetchOrcidPublications()
+    const cachedData = localStorage.getItem('orcidPublications')
+    if (cachedData) {
+      publications.value = JSON.parse(cachedData)
+      loading.value = false
+    }
+    else {
+      publications.value = await fetchOrcidPublications()
+    }
   }
   catch (e) {
     error.value = e instanceof Error ? e.message : 'An unknown error occurred'
