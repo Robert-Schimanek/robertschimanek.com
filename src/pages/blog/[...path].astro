@@ -24,6 +24,8 @@ const posts = await getPosts(path)
 function activeLink(pathname: string) {
   return Astro.url.pathname.replace(/\/+/g, '/').replace(/\/$/, '') === pathname
 }
+
+const isPublicationsRoute = activeLink('/blog/publications')
 ---
 
 <BaseLayout
@@ -46,10 +48,10 @@ function activeLink(pathname: string) {
     }
   </div>
   {
-    activeLink('/blog/publications') ? (
+    isPublicationsRoute ? (
       <ListOrchidPosts client:load />
     ) : (
-      <ListPosts list={posts} />
+      <ListPosts list={posts} currentPath={Astro.url.pathname} client:load />
     )
   }
 </BaseLayout>
