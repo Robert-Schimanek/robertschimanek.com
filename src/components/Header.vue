@@ -59,8 +59,8 @@ onMounted(() => {
 })
 
 function toggleNavDrawer() {
-  const drawer = document.querySelector('.nav-drawer') as HTMLElement
-  const mask = document.querySelector('.nav-drawer-mask') as HTMLElement
+  const drawer = document.querySelector('.nav-drawer-left') as HTMLElement
+  const mask = document.querySelector('.nav-drawer-left-mask') as HTMLElement
   if (!drawer || !mask)
     return
   if (drawer.style.transform === `translateX(0%)`) {
@@ -91,9 +91,11 @@ function toggleNavDrawer() {
           {{ link.text }}
         </a>
       </nav>
+      <!-- Left handed menu icon -->
+      <!--
       <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
-        <menu i-ri-menu-2-fill />
-      </div>
+        <i i-heroicons-solid-menu-alt-4 />
+      </div> -->
     </div>
     <div class="flex gap-x-6">
       <a
@@ -102,12 +104,16 @@ function toggleNavDrawer() {
       />
 
       <ThemeToggle />
+      <!-- Right handed menu icon -->
+      <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
+        <i i-heroicons-solid-menu-alt-4 />
+      </div>
     </div>
   </header>
   <nav
-    class="nav-drawer sm:hidden" style="view-transition-name: nav-drawer;"
+    class="nav-drawer-left sm:hidden" style="view-transition-name: nav-drawer-left;"
   >
-    <i i-ri-menu-2-fill />
+    <i i-heroicons-solid-menu-alt-4 />
     <a
       v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
       nav-link :href="link.href" @click="toggleNavDrawer()"
@@ -115,7 +121,7 @@ function toggleNavDrawer() {
       {{ link.text }}
     </a>
   </nav>
-  <div class="nav-drawer-mask" @click="toggleNavDrawer()" />
+  <div class="nav-drawer-left-mask" @click="toggleNavDrawer()" />
 </template>
 
 <style scoped>
@@ -128,9 +134,9 @@ function toggleNavDrawer() {
   --at-apply: backdrop-blur-sm;
 }
 
-.nav-drawer {
-  transform: translateX(-100%);
-  --at-apply: box-border fixed h-screen z-999 left-0 top-0 min-w-32vw max-w-50vw
+.nav-drawer-left,
+.nav-drawer-right {
+  --at-apply: box-border fixed h-screen z-999 top-0 min-w-32vw max-w-50vw
     bg-drawer p-6 text-lg flex flex-col gap-5 transition-all opacity-95;
   transition:
     transform 0.2s ease-in-out,
@@ -139,7 +145,18 @@ function toggleNavDrawer() {
   /* -webkit-backdrop-filter: blur(10px); */
 }
 
-.nav-drawer-mask {
+.nav-drawer-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.nav-drawer-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.nav-drawer-left-mask,
+.nav-drawer-right-mask {
   display: none;
   --at-apply: transition-all bg-opacity-50;
   content: '';
