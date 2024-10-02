@@ -49,16 +49,12 @@ export const siteConfig = {
         href: '/blog',
       },
       {
-        text: 'Notes',
-        href: '/blog/notes',
+        text: 'Expertise',
+        href: '/blog/expertise',
       },
       {
         text: 'Publications',
         href: '/blog/publications',
-      },
-      {
-        text: 'Talks',
-        href: '/blog/talks',
       },
       {
         text: 'Projects',
@@ -73,28 +69,24 @@ export const siteConfig = {
         href: '/blog',
       },
       {
-        text: 'Notes',
-        href: '/blog/notes',
+        text: 'Expertise',
+        href: '/blog/expertise',
       },
       {
         text: 'Publications',
         href: '/blog/publications',
-      },
-      {
-        text: 'Talks',
-        href: '/blog/talks',
       },
     ],
   },
   footer: {
     navLinks: [
       {
-        text: 'Posts Props',
-        href: '/posts-props',
+        text: 'This site',
+        href: '/this-site',
       },
       {
-        text: 'Impressum',
-        href: '/md-style',
+        text: 'Imprint',
+        href: '/imprint',
       },
       {
         text: 'GitHub Repository',
