@@ -23,10 +23,7 @@ html.dark .astro-code span {
 }
 
 html.dark {
-  /* color-scheme: dark; */
   color: #ffffff;
-  /* secondary: #b9b9b9; */
-  /*  overflow-y: scroll;*/
   /* scrollbar-color: rgba(255, 255, 255, 0.00001);*/
   scrollbar-gutter: stable;
   overflow-y: auto;
@@ -34,10 +31,9 @@ html.dark {
 
 html:not(.dark) {
   color: #000000;
-  /* color-scheme: light; */
-  /* overflow-y: scroll;*/
   /* --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);*/
   scrollbar-gutter: stable;
+  overflow-y: auto;
 }
 
 #nprogress {
