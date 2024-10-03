@@ -161,13 +161,11 @@ function hasChineseLanguage(post: Post): boolean {
           </span>
         </div>
         <a text-lg lh-tight nav-link flex="~ col gap-2" :aria-label="post.data.title" :target="getTarget(post)" :href="getHref(post)">
-          <div flex="~ col md:row gap-2 md:items-center">
-            <div flex="~ gap-2 items-center text-wrap">
-              <span lh-normal>
-                <i v-if="'draft' in post.data && post.data.draft" text-base vertical-mid i-ri-draft-line />
-                {{ post.data.title }}
-              </span>
-            </div>
+          <div flex="~ col gap-2 text-wrap">
+            <span lh-normal>
+              <i v-if="'draft' in post.data && post.data.draft" text-base vertical-mid i-ri-draft-line />
+              {{ post.data.title }}
+            </span>
             <div opacity-50 text-sm ws-nowrap flex="~ gap-2 items-center">
               <i v-if="post.data.redirect" text-base i-ri-external-link-line />
               <i v-if="'recording' in post.data && (post.data.recording || post.data.video)" text-base i-ri:film-line />
