@@ -1,6 +1,8 @@
 import { keys } from 'lodash-es'
 import { writable } from 'svelte/store'
 import * as THREE from 'three'
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js'
+import type { Path } from 'three'
 
 const GRID_SIZE = 50
 const POINT_SIZE = 0.001
@@ -128,7 +130,8 @@ class MagneticBackground {
 
         for (let i = 0; i < positions.length; i += 3) {
           const index = i / 3
-          this.particleAProgress[index] = progress
+          if (this.particleAProgress)
+            this.particleAProgress[index] = progress
 
           positions[i] = THREE.MathUtils.lerp(positions[i], this.particleAGoals[i], progress * 0.1)
           positions[i + 1] = THREE.MathUtils.lerp(positions[i + 1], this.particleAGoals[i + 1], progress * 0.1)
@@ -209,15 +212,68 @@ class MagneticBackground {
     const currentPositions = this.points.geometry.attributes.position.array as Float32Array
     const newPositions = new Float32Array(currentPositions.length)
 
-    const μ = Math.random() * 0.8 - 0.4
-    // Create new static particles (Set B)
-    for (let i = 0; i < newPositions.length; i += 3) {
-      const σ = 0.3
-      const x = Math.random() * 10 - 5
-      const k = 1 / Math.sqrt(2 * Math.PI)
-      newPositions[i] = x
-      newPositions[i + 1] = k * Math.exp((-1 * (x - μ) ** 2) / (2 * σ ** 2))
-      newPositions[i + 2] = this.staticPlaneZ
+    const loader = new SVGLoader()
+    const svgData = `
+<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M1.292 5.856L11.54 0v24l-4.095-2.378V7.603l-6.168 3.564l.015-5.31zm21.43 5.311l-.014-5.31L12.46 0v24l4.095-2.378V14.87l3.092 1.788l-.018-4.618l-3.074-1.756V7.603z"/></svg>
+`
+    const paths = loader.parse(svgData).paths
+
+    const scale = 0.05
+    const offsetX = -0.5
+    const offsetY = -0.5
+
+    const interpolatedPoints: any[] = []
+
+    paths.forEach((path) => {
+      const shapes = SVGLoader.createShapes(path)
+      shapes.forEach((shape) => {
+        // Handle the main shape
+        addPointsFromShape(shape)
+
+        // Handle holes (subshapes)
+        shape.holes.forEach((hole) => {
+          addPointsFromShape(hole)
+        })
+      })
+    })
+
+    function addPointsFromShape(shape: any) {
+      const points = shape.getPoints(5) // Increase this number for more detail
+      for (let i = 0; i < points.length; i++) {
+        const point = points[i]
+        const nextPoint = points[(i + 1) % points.length]
+
+        // Add the current point
+        interpolatedPoints.push(
+          point.x * scale + offsetX,
+          point.y * scale + offsetY,
+          0,
+        )
+
+        // Interpolate 9 points between current and next point
+        for (let j = 1; j <= 9; j++) {
+          const t = j / 10
+          interpolatedPoints.push(
+            THREE.MathUtils.lerp(point.x, nextPoint.x, t) * scale + offsetX,
+            THREE.MathUtils.lerp(point.y, nextPoint.y, t) * scale + offsetY,
+            0,
+          )
+        }
+      }
+    }
+
+    // Create geometry from interpolated points
+    const geometry = new THREE.BufferGeometry()
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(interpolatedPoints, 3))
+
+    // Number of points you want (assuming this is the length of newPositions)
+    const numPoints = newPositions.length / 3
+
+    for (let i = 0; i < numPoints; i++) {
+      const randomIndex = Math.floor(Math.random() * (interpolatedPoints.length / 3)) * 3
+      newPositions[i * 3] = interpolatedPoints[randomIndex]
+      newPositions[i * 3 + 1] = -interpolatedPoints[randomIndex + 1]
+      newPositions[i * 3 + 2] = this.staticPlaneZ
     }
 
     const staticGeometry = new THREE.BufferGeometry()
