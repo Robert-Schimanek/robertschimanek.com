@@ -151,12 +151,12 @@ function hasChineseLanguage(post: Post): boolean {
     <ul sm:min-h-38 min-h-28 mb-18>
       <template v-if="!allPosts || allPosts.length === 0">
         <div my-12 opacity-50>
-          nothing here yet.
+          Loading blog ...
         </div>
       </template>
       <li v-for="(post, index) in allPosts" :key="post.id || index" mb-8>
         <div v-if="!isSameYear(post.data.date, allPosts[index - 1]?.data.date)" select-none relative h18 pointer-events-none>
-          <span year-background text-outline-year font-bold year-typography>
+          <span year-text-hollow>
             {{ getYear(post.data.date) }}
           </span>
         </div>
@@ -191,7 +191,5 @@ function hasChineseLanguage(post: Post): boolean {
 .publication-indicator {
   font-style: italic;
   color: var(--color-text-muted);
-}
-
-/* Removed debug-info styles */
+} /* Removed debug-info styles */
 </style>
