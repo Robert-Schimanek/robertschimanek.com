@@ -17,6 +17,7 @@ export default defineConfig({
       'text-main': 'text-hex-555555 dark:text-hex-bbbbbb',
       'text-link': 'text-dark dark:text-white ',
       'border-main': 'border-truegray-300 dark:border-truegray-600',
+      'small-margin': 'px-4',
     },
     {
       'text-title': 'text-link text-4xl font-800',
@@ -30,6 +31,23 @@ export default defineConfig({
     },
     {
       'year-background': 'text-7em text-[rgba(170,170,170,0.001)] absolute top--0.2em',
+      'year-text': 'absolute left-0 text-8xl font-bold opacity-10 select-none',
+      'year-text-hollow': 'year-background text-outline-year font-bold year-typography',
+    },
+    {
+      'publication-item': 'mb-6',
+      'year-divider': 'relative h-18 pointer-events-none mb-4',
+      'publication-link': 'block hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200 p-4',
+      'publication-content': 'flex flex-col gap-2',
+      'publication-title': 'text-lg font-semibold leading-tight',
+      'publication-meta': 'text-sm opacity-60 flex items-center gap-2',
+      'external-link-icon': 'text-base',
+      'journal-title': 'italic',
+      'publication-indicator': 'italic text-muted',
+    },
+    {
+      'hero-image-wrapper': 'margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); max-height: 562px; overflow: hidden;',
+      'hero-image': 'width: 100%; height: auto; max-height: 562px; object-fit: cover;',
     },
   ],
   theme: {
