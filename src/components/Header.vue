@@ -77,43 +77,38 @@ function toggleNavDrawer() {
 <template>
   <header
     id="header" :class="{ 'header-bg-blur': scroll > 20 }"
-    class="!fixed bg-transparent z-899 w-screen h-20 px-6 flex justify-between items-center relative"
+    class="!fixed bg-transparent z-899 w-full h-16.2 small-margin flex justify-center items-center relative"
   >
-    <div class="flex items-center h-full">
-      <a href="/" mr-6 aria-label="Header Logo Image">
-        <img width="32" height="32" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt">
-      </a>
-      <nav class="sm:flex hidden flex-wrap gap-x-6 position-initial flex-row">
-        <a
-          v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
-          nav-link :href="link.href"
-        >
-          {{ link.text }}
+    <div class="w-full max-w-[1000px] flex justify-between items-center">
+      <div class="flex items-center h-full">
+        <a href="/" mr-6 aria-label="Header Logo Image">
+          <img width="32" height="32" :src="siteConfig.header.logo.src" :alt="siteConfig.header.logo.alt" rd-1.5>
         </a>
-      </nav>
-      <!-- Left handed menu icon -->
-      <!--
-      <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
-        <i i-heroicons-solid-menu-alt-4 />
-      </div> -->
-    </div>
-    <div class="flex gap-x-6">
-      <a
-        v-for="link in socialLinks" :key="link.text" :aria-label="`${link.text}`" :class="link.icon" nav-link
-        :target="getLinkTarget(link.href)" :href="link.href"
-      />
-
-      <ThemeToggle />
-      <!-- Right handed menu icon -->
-      <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
-        <i i-heroicons-solid-menu-alt-4 />
+        <nav class="sm:flex hidden flex-wrap gap-x-7 position-initial flex-row">
+          <a
+            v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
+            nav-link :href="link.href"
+          >
+            {{ link.text }}
+          </a>
+        </nav>
+      </div>
+      <div class="flex gap-x-7 items-center">
+        <a
+          v-for="link in socialLinks" :key="link.text" :aria-label="`${link.text}`" :class="link.icon" nav-link
+          :target="getLinkTarget(link.href)" :href="link.href"
+        />
+        <ThemeToggle />
+        <div sm:hidden h-full flex items-center @click="toggleNavDrawer()">
+          <i class="custom-menu-icon-size i-heroicons-solid-menu-alt-4" />
+        </div>
       </div>
     </div>
   </header>
   <nav
     class="nav-drawer-left sm:hidden" style="view-transition-name: nav-drawer-left;"
   >
-    <i i-heroicons-solid-menu-alt-4 />
+    <i class="custom-menu-icon-size i-heroicons-solid-menu-alt-4" />
     <a
       v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
       nav-link :href="link.href" @click="toggleNavDrawer()"
@@ -125,6 +120,12 @@ function toggleNavDrawer() {
 </template>
 
 <style scoped>
+.custom-menu-icon-size {
+  font-size: 1.5rem; /* or 22px */
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .header-hide {
   transform: translateY(-100%);
   transition: transform 0.4s ease;
