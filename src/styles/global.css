@@ -51,10 +51,6 @@ html:not(.dark) {
   height: 0.5px;
 }
 
-img {
-  --at-apply: rd-1.5;
-}
-
 article {
   --at-apply: sm: min-h-38 min-h-28;
 }
