@@ -95,17 +95,19 @@ onMounted(() => {
 })
 
 function toggleNavDrawer() {
-  const drawer = document.querySelector('.nav-drawer-left') as HTMLElement
-  const mask = document.querySelector('.nav-drawer-left-mask') as HTMLElement
+  const drawer = document.querySelector('.nav-drawer-top') as HTMLElement
+  const mask = document.querySelector('.nav-drawer-top-mask') as HTMLElement
   if (!drawer || !mask)
     return
-  if (drawer.style.transform === `translateX(0%)`) {
-    drawer.style.transform = `translateX(-100%)`
+  if (drawer.style.transform === `translateY(0%)`) {
+    drawer.style.transform = `translateY(-100%)`
     mask.style.display = `none`
+    document.body.classList.remove('drawer-open')
   }
   else {
-    drawer.style.transform = `translateX(0%)`
+    drawer.style.transform = `translateY(0%)`
     mask.style.display = `block`
+    document.body.classList.add('drawer-open')
   }
 }
 </script>
@@ -161,19 +163,39 @@ function toggleNavDrawer() {
     </div>
   </header>
 
-  <!-- Rest of the template remains unchanged -->
+  <!-- Modified nav drawer to come from top -->
   <nav
-    class="nav-drawer-left sm:hidden" style="view-transition-name: nav-drawer-left;"
+    class="nav-drawer-top sm:hidden"
+    style="view-transition-name: nav-drawer-top;"
   >
-    <i class="custom-menu-icon-size i-heroicons-solid-menu-alt-4" />
-    <a
-      v-for="link in navLinks" :key="link.text" :aria-label="`${link.text}`" :target="getLinkTarget(link.href)"
-      nav-link :href="link.href" @click="toggleNavDrawer()"
-    >
-      {{ link.text }}
-    </a>
+    <div class="nav-drawer-content">
+      <div class="nav-drawer-header">
+        <i class="custom-menu-icon-size i-heroicons-solid-x-mark" @click="toggleNavDrawer()" />
+      </div>
+      <div class="nav-drawer-links">
+        <a
+          nav-link
+          href="/"
+          class="home-link"
+          @click="toggleNavDrawer()"
+        >
+          Robert Schimanek
+        </a>
+        <a
+          v-for="link in navLinks"
+          :key="link.text"
+          :aria-label="`${link.text}`"
+          :target="getLinkTarget(link.href)"
+          nav-link
+          :href="link.href"
+          @click="toggleNavDrawer()"
+        >
+          {{ link.text }}
+        </a>
+      </div>
+    </div>
   </nav>
-  <div class="nav-drawer-left-mask" @click="toggleNavDrawer()" />
+  <div class="nav-drawer-top-mask" @click="toggleNavDrawer()" />
 </template>
 
 <style scoped>
@@ -192,29 +214,45 @@ function toggleNavDrawer() {
   --at-apply: backdrop-blur-sm;
 }
 
-.nav-drawer-left,
-.nav-drawer-right {
-  --at-apply: box-border fixed h-screen z-999 top-0 min-w-32vw max-w-50vw
-    bg-drawer p-6 text-lg flex flex-col gap-5 transition-all opacity-95;
+.nav-drawer-top {
+  --at-apply: box-border fixed w-screen h-screen z-999 left-0 bg-drawer flex
+    flex-col transition-all opacity-95;
   transition:
-    transform 0.2s ease-in-out,
+    transform 0.3s ease-in-out,
     background-color 0.2s ease;
-  /* backdrop-filter: blur(10px); */
-  /* -webkit-backdrop-filter: blur(10px); */
+  top: 0;
+  transform: translateY(-100%);
 }
 
-.nav-drawer-left {
-  left: 0;
-  transform: translateX(-100%);
+.nav-drawer-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
 }
 
-.nav-drawer-right {
-  right: 0;
-  transform: translateX(100%);
+.nav-drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
 }
 
-.nav-drawer-left-mask,
-.nav-drawer-right-mask {
+.nav-drawer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: top;
+  flex-grow: 1;
+  gap: 1.5rem;
+  padding-left: 1rem;
+}
+
+.nav-drawer-top a {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.nav-drawer-top-mask {
   display: none;
   --at-apply: transition-all bg-opacity-50;
   content: '';
