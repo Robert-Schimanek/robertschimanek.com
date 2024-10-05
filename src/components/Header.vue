@@ -34,6 +34,8 @@ const oldScroll = ref(unref(scroll))
 
 const currentRouteName = ref('Page')
 
+let scrollPosition = 0
+
 onMounted(() => {
   const updateRouteName = () => {
     const path = window.location.pathname
@@ -103,11 +105,19 @@ function toggleNavDrawer() {
     drawer.style.transform = `translateY(-100%)`
     mask.style.display = `none`
     document.body.classList.remove('drawer-open')
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.width = ''
+    window.scrollTo(0, scrollPosition)
   }
   else {
+    scrollPosition = window.pageYOffset
     drawer.style.transform = `translateY(0%)`
     mask.style.display = `block`
     document.body.classList.add('drawer-open')
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${scrollPosition}px`
+    document.body.style.width = '100%'
   }
 }
 </script>
@@ -263,5 +273,9 @@ function toggleNavDrawer() {
   height: 100vh;
   background: rgba(0, 0, 0, 0.1);
   z-index: 998;
+}
+
+:global(body.drawer-open) {
+  overflow: hidden;
 }
 </style>
