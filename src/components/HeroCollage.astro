@@ -1,0 +1,145 @@
+---
+// HeroCollage.astro
+interface ImageProps {
+  src: string
+  alt: string
+  align?: 'left' | 'right' | 'center'
+  width?: '1/4' | '1/3' | '1/2' | '2/3' | '3/4' | 'full'
+}
+
+interface Props {
+  title: string
+  subtitle: string
+  description: string
+  mainImage: ImageProps
+  secondaryImage?: ImageProps
+  personImage?: ImageProps & {
+    name?: string
+    position: string
+  }
+}
+
+const { title, subtitle, description, mainImage, secondaryImage, personImage } =
+  Astro.props
+
+function getImageClassAttributes(
+  image: ImageProps,
+  defaultAlign: 'left' | 'right' | 'center',
+) {
+  const align = image.align || defaultAlign
+  const alignClass =
+    align === 'left' ? 'mr-auto' : align === 'right' ? 'ml-auto' : 'mx-auto'
+  const widthClass = image.width ? `w-${image.width}` : 'w-full'
+  return `${widthClass} h-auto object-cover ${alignClass}`
+}
+
+function getImageWidthAttributes(
+  image: ImageProps,
+  defaultWidth: '1/4' | '1/3' | '1/2' | '2/3' | '3/4' | 'full',
+) {
+  const width = image.width ? `w-${image.width}` : `w-${defaultWidth}`
+  return width
+}
+---
+
+<section class="relative">
+  <div class="box-content mx-auto relative lg:pb-[5%]">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-x-4">
+      <!-- Main image -->
+      <div class="z-10 space-y-24 relative -mx-4 lg:mx-0">
+        <figure class="lg:flex">
+          <img
+            src={mainImage.src}
+            alt={mainImage.alt}
+            class={`${getImageClassAttributes(mainImage, 'right')} lg:translate-y-1/4`}
+            loading="lazy"
+          />
+        </figure>
+      </div>
+
+      <!-- Text box -->
+      <div
+        class="relative z-20 lg:absolute lg:inset-0 flex lg:items-center lg:justify-center z-20 pointer-events-none lg:translate-y-9 -mt-16 lg:mt-0 p-4"
+      >
+        <div
+          class="bg-white bg-opacity-95 lg:p-7 p-5 rounded-lg lg:max-w-md pointer-events-auto"
+        >
+          <h2 class="text-black collage">
+            {title}
+          </h2>
+          <h3 class="text-black collage">
+            {subtitle}
+          </h3>
+          <div class="hidden block">
+            <p>{description}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary images -->
+      <div class="z-10 lg:space-y-4 lg:mt-0">
+        <div>
+          {
+            secondaryImage && (
+              <img
+                src={secondaryImage.src}
+                alt={secondaryImage.alt}
+                class={`collage hidden lg:block ${getImageClassAttributes(secondaryImage, 'left')}`}
+                loading="lazy"
+              />
+            )
+          }
+        </div>
+        <div>
+          {
+            personImage && (
+              <figure class="collage grid grid-cols-1 lg:gap-x-24 items-end">
+                <img
+                  src={personImage.src}
+                  alt={personImage.alt}
+                  class={`collage hidden lg:block ${getImageWidthAttributes(personImage, 'full')}`}
+                  loading="lazy"
+                />
+                {personImage.name && (
+                  <figcaption class="font-montserrat bg-white bg-opacity-90 lg:p-4 lg:rounded">
+                    <p class="text-title-20 text-grey-900 md:text-title-24 dark:text-white">
+                      {personImage.name}
+                    </p>
+                    {personImage.position && (
+                      <p class="font-semibold">{personImage.position}</p>
+                    )}
+                  </figcaption>
+                )}
+              </figure>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupHeroCollage() {
+    document.querySelectorAll('.js-hero-collage').forEach((collage) => {
+      const figcaption = collage.querySelector('.js-hero-collage-figcaption')
+      if (figcaption) {
+        addBottomPadding(figcaption as HTMLElement, collage as HTMLElement)
+        window.addEventListener('resize', () => {
+          addBottomPadding(figcaption as HTMLElement, collage as HTMLElement)
+        })
+      }
+    })
+  }
+
+  function addBottomPadding(figcaption: HTMLElement, collage: HTMLElement) {
+    const figcaptionHeight = figcaption.offsetHeight
+    collage.style.paddingBottom = `${figcaptionHeight}px`
+  }
+
+  document.addEventListener('DOMContentLoaded', setupHeroCollage)
+</script>
+
+<style>
+  /* Add any necessary UnoCSS classes here */
+</style>
