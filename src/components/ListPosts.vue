@@ -184,10 +184,3 @@ function hasChineseLanguage(post: Post): boolean {
     </ul>
   </div>
 </template>
-
-<style scoped>
-.publication-indicator {
-  font-style: italic;
-  color: var(--color-text-muted);
-} /* Removed debug-info styles */
-</style>
