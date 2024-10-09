@@ -31,7 +31,7 @@ defineProps<{
             :href="`/expertise/${area.slug}`"
             class=" expertise-card-link after:absolute after:inset-0 group transition-all ease-in-out duration-300 flex items-center expertise-link"
           >
-            <span class="flex-grow lg:text-xl text-lg lg:mb-0 mb-3 lg:mt-0 mt-3">{{ area.title }}</span>
+            <span class="flex-grow lg:text-xl text-lg lg:mb-0 mb-3 lg:mt-0 mt-3 text-wrap break-words">{{ area.title }}</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="transition-transform ease-in-out duration-300 group-hover:translate-x-1 lg:w-12 lg:h-12 w-8 h-8 text-current inline-block "

@@ -24,10 +24,10 @@ function toggleAccordion(index: number) {
   <div class="flex flex-col flex-grow lg:p-0 divide-gray-600 divide-opacity-50 divide-y-1">
     <div v-for="(item, index) in toolkit" :key="index" class="divide-gray-600 divide-opacity-50 divide-y-1">
       <button
-        class="flex items-center justify-between w-full text-left link-hover-color expertise-card-link"
+        class="flex items-center justify-between w-full text-left link-hover-color expertise-card-link "
         @click="toggleAccordion(index)"
       >
-        <span class="flex-grow lg:text-xl text-lg lg:mb-2 mb-2 lg:mt-2 mt-3">{{ item.header }}</span>
+        <span class="flex-grow lg:text-xl text-lg lg:mb-2 mb-2 lg:mt-2 mt-3 text-wrap break-words">{{ item.header }}</span>
         <svg
           class="w-5 h-5 ml-2 flex-shrink-0 transition-transform duration-500"
           :class="{ 'rotate-180': openIndex === index }"

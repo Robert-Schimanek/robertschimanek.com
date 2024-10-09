@@ -79,16 +79,20 @@ const toolkitGroups = categories.map((category) => {
     </div>
   </div>
   <article class="prose">
-    <div class="content-zoom p-4">
+    <div class="content-zoom lg:p-0 p-4">
       <h1 class="text-title">Beyond code.</h1>
       <h2 class="text-2xl text-align-left font-bold">
         Hi, I am Robert Schimanek, an Engineer and Developer who converts vague
         specifications and unrealistic expectations into reliable processes and
         products.
       </h2>
-      <div class="accordion-cards-wrapper">
-        <ToolkitGroupAccordion toolkit={toolkitGroups} client:load />
-      </div>
+
+      <ToolkitGroupAccordion toolkit={toolkitGroups} client:load class="" />
+    </div>
+    <div class="expertise-cards-wrapper">
+      <ExpertiseSlider expertises={allExpertise} />
+    </div>
+    <div class="content-zoom lg:p-0 p-4">
       <h3 class="text-2xl text-align-left font-bold">
         Projects with a sustainable impact on people and businesses drive me. I
         specialize in sustainable energy and advanced software/hardware
@@ -98,42 +102,38 @@ const toolkitGroups = categories.map((category) => {
         <a href="/blog/publications" class="prose-link">publications</a> for more
         details.
       </h3>
+      <hr class="hr-line" />
+      <h1 class="text-title text-align-left">
+        Ready to <span class="text-[#ff4438]">build greatness</span> together?
+      </h1>
+      <h3 class="text-2xl text-align-left font-bold">
+        Reach out via <a
+          class="prose-link"
+          aria-label={siteConfig.email}
+          href={`mailto:${siteConfig.email}`}
+        >
+          {siteConfig.email}
+        </a>
+
+        or on social media.
+      </h3>
+
+      <p class="flex gap-x-4 gap-y-2 flex-wrap">
+        {
+          siteConfig.socialLinks.map((link) => (
+            <a
+              aria-label={link.text}
+              href={link.href}
+              target="_blank"
+              class="prose-link"
+            >
+              <i class:list={[link.icon]} />
+              {link.text}
+            </a>
+          ))
+        }
+      </p>
     </div>
-    <div class="expertise-cards-wrapper">
-      <ExpertiseSlider expertises={allExpertise} />
-    </div>
-
-    <hr class="hr-line" />
-    <h1 class="text-title text-align-left">
-      Ready to <span class="text-[#ff4438]">build greatness</span> together?
-    </h1>
-    <h3 class="text-2xl text-align-left font-bold">
-      Reach out via <a
-        class="prose-link"
-        aria-label={siteConfig.email}
-        href={`mailto:${siteConfig.email}`}
-      >
-        {siteConfig.email}
-      </a>
-
-      or on social media.
-    </h3>
-
-    <p class="flex gap-x-4 gap-y-2 flex-wrap">
-      {
-        siteConfig.socialLinks.map((link) => (
-          <a
-            aria-label={link.text}
-            href={link.href}
-            target="_blank"
-            class="prose-link"
-          >
-            <i class:list={[link.icon]} />
-            {link.text}
-          </a>
-        ))
-      }
-    </p>
   </article>
 </BaseLayout>
 
