@@ -12,7 +12,7 @@ export const siteConfig = {
   socialLinks: [
     {
       text: 'GitHub',
-      href: 'https://github.com/robert-schimanek',
+      href: 'https://github.com/Robert-Schimanek?tab=repositories',
       icon: 'i-simple-icons-github',
       header: 'i-ri-github-line',
     },
@@ -23,19 +23,14 @@ export const siteConfig = {
       header: 'i-ri-twitter-x-line',
     },
     {
+      text: 'Xing',
+      href: 'https://www.xing.com/profile/Robert_Schimanek',
+      icon: 'i-simple-icons-xing',
+    },
+    {
       text: 'Linkedin',
-      href: '',
+      href: 'https://www.linkedin.com/in/robert-schimanek/',
       icon: 'i-simple-icons-linkedin',
-    },
-    {
-      text: 'Instagram',
-      href: '',
-      icon: 'i-simple-icons-instagram',
-    },
-    {
-      text: 'Youtube',
-      href: '',
-      icon: 'i-simple-icons-youtube',
     },
   ],
   header: {
@@ -45,36 +40,32 @@ export const siteConfig = {
     },
     navLinks: [
       {
-        text: 'Blog',
-        href: '/blog',
+        text: 'Expertise',
+        href: '/expertise',
       },
       {
-        text: 'Expertise',
-        href: '/blog/expertise',
+        text: 'Projects',
+        href: '/projects',
       },
       {
         text: 'Publications',
         href: '/blog/publications',
       },
       {
-        text: 'Projects',
-        href: '/projects',
+        text: 'Blog',
+        href: '/blog',
       },
     ],
   },
   page: {
     blogLinks: [
       {
-        text: 'Blog',
-        href: '/blog',
-      },
-      {
-        text: 'Expertise',
-        href: '/blog/expertise',
-      },
-      {
         text: 'Publications',
         href: '/blog/publications',
+      },
+      {
+        text: 'Blog',
+        href: '/blog',
       },
     ],
   },
