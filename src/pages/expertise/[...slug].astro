@@ -1,0 +1,104 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import HeroCollage from '@/components/HeroCollage.astro'
+import ToolkitGroupAccordion from '@/components/ToolkitGroupAccordion.vue'
+import ExpertiseSlider from '@/components/ExpertiseSlider.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const expertiseEntries = await getCollection('expertise')
+  return expertiseEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+
+// Fetch all expertise entries to get the current expertiseGroup
+const allExpertiseEntries = await getCollection('expertise')
+const currentGroup = allExpertiseEntries.find(
+  (e) => e.data.group === entry.data.group,
+)
+const groupExpertises = allExpertiseEntries.filter(
+  (e) => e.data.group === currentGroup.data.group,
+)
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="prose">
+    <h1 class="text-title">{entry.data.title}</h1>
+    <div class="expertise-cards-wrapper p-4">
+      <HeroCollage
+        title={entry.data.title}
+        subtitle={entry.data.subtitle}
+        description={entry.data.description}
+        mainImage={{
+          src: entry.data.mainImage,
+          alt: `${entry.data.title} main image`,
+          align: 'right',
+          width: 'full',
+        }}
+        secondaryImage={{
+          src: entry.data.secondaryImage,
+          alt: `${entry.data.title} secondary image`,
+          align: 'left',
+          width: '3/4',
+        }}
+        personImage={{
+          src: entry.data.personImage,
+          alt: `${entry.data.title} expert image`,
+          position: 'Expert',
+          align: 'right',
+          width: '1/2',
+        }}
+      />
+    </div>
+    <div class="accordion-cards-wrapper lg:p-0 p-4">
+      {
+        entry.data.execSummary && (
+          <div class="exec-summary-wrapper my-8">
+            <h2 class="text-5xl font-bold">{entry.data.execSummary}</h2>
+          </div>
+        )
+      }
+    </div>
+    <div class="accordion-cards-wrapper lg:p-0 p-4">
+      <ToolkitGroupAccordion toolkit={entry.data.toolkit} client:load />
+    </div>
+    <div class="expertise-cards-wrapper">
+      <ExpertiseSlider expertises={groupExpertises} currentSlug={entry.slug} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .expertise-cards-wrapper {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1600px) {
+    .expertise-cards-wrapper {
+      width: 1600px;
+      margin-left: max(calc(-50vw + 50%), calc(-800px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-800px + 50%));
+    }
+  }
+
+  .accordion-cards-wrapper {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1000px) {
+    .accordion-cards-wrapper {
+      width: 1000px;
+      margin-left: max(calc(-50vw + 50%), calc(-500px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-500px + 50%));
+    }
+  }
+</style>

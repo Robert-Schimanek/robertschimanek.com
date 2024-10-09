@@ -1,0 +1,127 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { Image } from 'astro:assets'
+import HeroCollage from '@/components/HeroCollage.astro'
+import ExpertiseGroupCard from '@/components/ExpertiseGroupCard.vue'
+const expertiseGroups = [
+  {
+    title: 'Big Data & Artificial Intelligence',
+    description:
+      'My expertise spans from developing sophisticated AI models to implementing data engineering pipelines. I excel in transforming raw data into actionable insights, leveraging tools like TensorFlow and PyTorch for deep learning, and applying my skills to solve complex problems in energy and automotive sectors.',
+    image: '/ml-ai-model.webp',
+    areas: [
+      { title: 'Data Engineering & ETL', slug: 'data-engineering-&-etl' },
+      {
+        title: 'Machine Learning & AI',
+        slug: 'machine-learning-&-ai-development',
+      },
+      {
+        title: 'Data Analytics & BI',
+        slug: 'data-analytics-&-bi',
+      },
+    ],
+  },
+  {
+    title: 'Full-Stack Development',
+    description:
+      'As a full-stack developer, I craft comprehensive digital solutions from frontend to backend. My approach focuses on creating modern, reusable architectures that adapt across devices and industries. I ensure seamless integration, from intuitive user interfaces to efficient server-side applications, always prioritizing performance and user experience.',
+    image: '/code.webp',
+    areas: [
+      { title: 'Web Development', slug: 'web-development' },
+      { title: 'Human Machine Interfaces', slug: 'human-machine-interfaces' },
+      { title: 'Mobile Development', slug: 'mobile-development' },
+    ],
+  },
+]
+---
+
+<BaseLayout
+  title="Expertise"
+  description="Explore my areas of expertise in software development and digital solutions."
+>
+  <article class="prose">
+    <h1 class="text-title">Expertise</h1>
+    <div class="expertise-cards-wrapper lg:p-4">
+      <HeroCollage
+        title="Beyond code."
+        subtitle="“My expertise in development, cutting-edge technologies to build experiences across domains!”"
+        description=""
+        mainImage={{
+          src: '/expertise-full-stack-development-vs-code-screen.png',
+          alt: 'Expertise main image',
+          align: 'right',
+          width: 'full',
+        }}
+        secondaryImage={{
+          src: '/Expertise-HMI-Design-Thinking-close.webp',
+          alt: 'Expertise secondary image',
+          align: 'left',
+          width: '3/4',
+        }}
+        personImage={{
+          src: '/Expertise-Web-Design.webp',
+          alt: 'Expert image',
+          position: 'CEO',
+          align: 'right',
+          width: '1/2',
+        }}
+      />
+    </div>
+    <div class="expertise-cards-wrapper p-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-4 gap-8">
+        {
+          expertiseGroups.map((group, index) => (
+            <div class="flex flex-col h-full overflow-hidden">
+              <ExpertiseGroupCard group={group} client:load />
+              <div class="w-full aspect-[2/1] overflow-hidden hidden lg:block ">
+                <Image
+                  src={group.image}
+                  width={1000}
+                  height={562}
+                  alt={`${group.title} expertise`}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .link-hover-color {
+    &:hover {
+      color: #ff4438;
+      transition: color 0.4s ease-in-out;
+    }
+    &:not(:hover) {
+      transition: color 0.4s ease-in-out;
+    }
+  }
+
+  .expertise-cards-wrapper {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+  }
+
+  @media (min-width: 1600px) {
+    .expertise-cards-wrapper {
+      width: 1600px;
+      margin-left: max(calc(-50vw + 50%), calc(-800px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-800px + 50%));
+    }
+  }
+
+  @media (min-width: 900px) {
+    .lg\:grid-cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .max-w-\[1600px\] {
+    max-width: 1600px;
+  }
+</style>
