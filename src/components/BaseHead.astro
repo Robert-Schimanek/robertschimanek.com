@@ -117,15 +117,3 @@ function formatCanonicalURL(url: string | URL) {
     <meta name="twitter:image:alt" content={resolvedImage?.alt} />
   )
 }
-
-<script>
-  import nprogress from 'nprogress'
-
-  document.addEventListener('astro:before-preparation', () => {
-    nprogress.start()
-  })
-
-  document.addEventListener('astro:page-load', () => {
-    nprogress.done()
-  })
-</script>
