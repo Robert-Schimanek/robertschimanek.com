@@ -20,11 +20,13 @@ export default defineConfig({
       'small-margin': 'px-4',
     },
     {
-      'text-title': 'text-link text-4xl font-800',
+      'text-title': 'text-link lg:text-7xl text-5xl lg:font-900 font-800 text-center',
       'nav-link': 'text-link opacity-70 hover:opacity-100 transition-opacity duration-200 cursor-pointer',
       'prose-link': 'text-link text-nowrap cursor-pointer border-b-1 !border-opacity-30 hover:!border-opacity-100 border-neutral-500 hover:border-truegray-600 dark:border-neutral-500 hover:dark:border-truegray-400 transition-border-color duration-200 decoration-none',
+      'expertise-card-link': 'text-link text-nowrap cursor-pointer border-none',
       'container-link': 'p-2 opacity-60 hover:opacity-100 cursor-pointer hover:bg-truegray-500 !bg-opacity-10 transition-colors transition-opacity duration-200',
       'container-project-icon': 'p-2 opacity-60 hover:opacity-100 cursor-pointer hover:bg-truegray-500 !bg-opacity-10 transition-colors transition-opacity duration-200',
+      'linker-hover-color': 'text-hex-ff4438 transition-colors duration-400 ease-in-out',
     },
     {
       'hr-line': 'w-14 mx-auto my-8 border-solid border-1px !border-truegray-200 !dark:border-truegray-800',
@@ -48,6 +50,9 @@ export default defineConfig({
     {
       'hero-image-wrapper': 'margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); max-height: 562px; overflow: hidden;',
       'hero-image': 'width: 100%; height: auto; max-height: 562px; object-fit: cover;',
+    },
+    {
+      'full-bleed-wrapper': 'ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)] max-w-[1600px] w-screen flex justify-center items-center mx-auto',
     },
   ],
   theme: {
@@ -172,6 +177,7 @@ export default defineConfig({
     'i-simple-icons-github',
     'i-simple-icons-x',
     'i-simple-icons-linkedin',
+    'i-simple-icons-xing',
     'i-simple-icons-instagram',
     'i-simple-icons-youtube',
     'i-simple-icons-bilibili',

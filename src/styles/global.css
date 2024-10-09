@@ -55,7 +55,21 @@ article {
   --at-apply: sm: min-h-38 min-h-28;
 }
 
+.link-hover-color {
+  &:hover {
+    color: #ff4438;
+    transition: color 0.4s ease-in-out;
+  }
+  &:not(:hover) {
+    transition: color 0.4s ease-in-out;
+  }
+}
+
 .prose-link i {
+  --at-apply: text-sm mr-1;
+}
+
+.expertise-card-link i {
   --at-apply: text-sm mr-1;
 }
 
