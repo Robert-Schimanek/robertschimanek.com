@@ -8,6 +8,7 @@ import ScrollToTop from '@/components/ScrollToTop.vue'
 import MagneticBackground from '@/components/MagneticBackground.astro'
 
 const { ...head } = Astro.props
+const pageTitle = Astro.props.title
 ---
 
 <!doctype html>
@@ -38,8 +39,42 @@ const { ...head } = Astro.props
       import { fetchOrcidPublications } from '@/utils/orchidRecords'
 
       document.addEventListener('astro:page-load', async () => {
-        if (!localStorage.getItem('orcidPublications')) {
-          await fetchOrcidPublications()
+        const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+        const cachedData = localStorage.getItem('orcidPublications')
+        const cachedTimestamp = localStorage.getItem(
+          'orcidPublicationsTimestamp',
+        )
+
+        if (cachedData && cachedTimestamp) {
+          const now = Date.now()
+          if (now - parseInt(cachedTimestamp) < CACHE_DURATION) {
+            // Use cached data if it's less than 24 hours old
+            return
+          }
+        }
+
+        // Fetch new data if cache is empty or outdated
+        const newData = await fetchOrcidPublications()
+        localStorage.setItem('orcidPublications', JSON.stringify(newData))
+        localStorage.setItem(
+          'orcidPublicationsTimestamp',
+          Date.now().toString(),
+        )
+      })
+    </script>
+    <script>
+      document.addEventListener('click', async (event) => {
+        const target = event.target as Element
+        const iconClass = Array.from(target.classList).find((cls) =>
+          cls.startsWith('i-'),
+        )
+        if (iconClass) {
+          const { iconYouTubeLinks } = await import('@/utils/iconMap')
+          const youtubeLink = iconYouTubeLinks.get(iconClass)
+          if (youtubeLink) {
+            event.preventDefault()
+            window.open(youtubeLink, '_blank')
+          }
         }
       })
     </script>
@@ -47,15 +82,15 @@ const { ...head } = Astro.props
   <body class="text-main min-h-screen font-sans w-full bg-main">
     <MagneticBackground transition:persist />
     <div id="content" class="relative z-10">
-      <Header client:load />
+      <Header client:load pageTitle={pageTitle} />
       <main
         class="grow max-w-3xl mx-auto sm:pt-32 pt-24 pb-16 small-margin relative"
-        transition:animate={fade({ duration: '0.8s' })}
+        transition:animate={fade({ duration: '0.18s' })}
       >
         <slot />
-        <ScrollToTop client:load />
-        <Footer />
       </main>
+      <Footer client:load />
+      <ScrollToTop client:load />
     </div>
     <script></script>
   </body>
