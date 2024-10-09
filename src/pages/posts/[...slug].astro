@@ -37,11 +37,27 @@ function getDate(date: string) {
     </p>
     {
       image && (
-        <p>
-          <img width="640" height="360" src={image.src} alt={image.alt || ''} />
-        </p>
+        <div class="post-image-wrapper">
+          <img src={image.src} alt={image.alt || ''} hero-image />
+        </div>
       )
     }
     <Content />
   </article>
 </BaseLayout>
+
+<style>
+  .post-image-wrapper {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    max-height: 562px;
+    overflow: hidden;
+  }
+  @media (min-width: 1000px) {
+    .post-image-wrapper {
+      width: 1000px;
+      margin-left: max(calc(-50vw + 50%), calc(-500px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-500px + 50%));
+    }
+  }
+</style>
