@@ -1,76 +1,127 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import siteConfig from '@/site-config'
+import { Image } from 'astro:assets'
+import HeroLight from '/public/hero_light.png'
+import HeroDark from '/public/Hero.png'
+import ToolkitGroupAccordion from '@/components/ToolkitGroupAccordion.vue'
+import ExpertiseSlider from '@/components/ExpertiseSlider.astro'
+import { getCollection } from 'astro:content'
+
+// Fetch all expertise entries
+const allExpertise = await getCollection('expertise')
+
+// Gather all unique categories
+const categories = [
+  ...new Set(
+    allExpertise.map((entry) => entry.data.expertiseGroup).filter(Boolean),
+  ),
+]
+
+// Create tech stacks for each category
+const toolkitGroups = categories.map((category) => {
+  const categoryEntries = allExpertise.filter(
+    (entry) => entry.data.expertiseGroup === category,
+  )
+  const allTechStacks = categoryEntries.flatMap(
+    (entry) =>
+      entry.data.toolkit?.flatMap((tool) => tool['tech-stack'] || []) || [],
+  )
+  const uniqueTechStack = [...new Set(allTechStacks)]
+
+  let description = ''
+  switch (category) {
+    case 'Data Science & Analytics':
+      description =
+        'Transforming raw data into actionable insights through advanced statistical analysis, data mining, and visualization techniques. Leveraging powerful tools and methodologies to uncover patterns, predict trends, and drive data-informed decision-making across various industries. Empowering businesses to harness the full potential of their data assets.'
+      break
+    case 'Artificial Intelligence & Machine Learning':
+      description =
+        'Developing intelligent systems that learn from data, adapt to new inputs, and perform human-like tasks. Implementing cutting-edge algorithms for natural language processing, computer vision, and predictive modeling. Creating AI-powered solutions that automate processes, enhance decision-making, and unlock new possibilities across diverse domains.'
+      break
+    case 'Full-Stack Development for Enhanced User Experiences':
+      description =
+        'Crafting end-to-end digital solutions that seamlessly integrate frontend and backend technologies. Building responsive, intuitive user interfaces coupled with robust server-side architectures. Leveraging modern frameworks and best practices to deliver high-performance, scalable applications that prioritize user engagement and satisfaction across all devices.'
+      break
+    default:
+      description = `Description for ${category}` // Fallback description
+  }
+
+  return {
+    header: category,
+    description: description,
+    'tech-stack': uniqueTechStack,
+  }
+})
 ---
 
-<BaseLayout description={siteConfig.description}>
+<BaseLayout title="Robert Schimanek" description={siteConfig.description}>
+  <div class="video-container w-full flex justify-center">
+    <div class="video-wrapper justify-center">
+      <video
+        src="/Table_II.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="middle-video"></video>
+      <video
+        src="/Table_I.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="side-video hidden md:block"></video>
+      <video
+        src="/Table_III.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="side-video hidden md:block"></video>
+    </div>
+  </div>
   <article class="prose">
-    <h1 class="text-title">Robert Schimanek</h1>
-    <p>
-      Engineer who converts vague specifications and unrealistic expectations
-      into reliable software. Sometimes I write too, check out my <a
-        href="/blog/publications"
-        class="prose-link">publications</a
-      >. fact: I once built a robot that was controlled by a neural network.
-    </p>
-    <p>
-      <img width="640" height="360" src="/hero.jpg" alt="Hero Image" />
-    </p>
-    <p>
-      Based on first principles thinking, and you can also see from the picture
-      <sup>👆</sup>, the goal of this theme is to
-      <b>make complex things as simple as possible</b>
-      . So, the core of this theme is the content, and the other elements are just
-      auxiliary.
-    </p>
-    <p>Here are the features you don't need to worry about:</p>
-    <ul>
-      <li>100 / 100 Lighthouse performance</li>
-      <li>Responsive</li>
-      <li>SEO-friendly</li>
-      <li>Light / Dark Theme</li>
-      <li>Markdown support</li>
-      <li>
-        <a target="_blank" href="https://mdxjs.com/">MDX</a>
-        (components in your markdown) support
-      </li>
-      <li>
-        <a target="_blank" href="https://vuejs.org/">Vue</a>
-        SFC component support
-      </li>
-      <li>Auto generated sitemap and RSS Feed</li>
-      <li>
-        <a target="_blank" href="https://vueuse.org/">VueUse</a>
-        &
-        <a target="_blank" href="https://lodash.com/">Lodash</a>
-        support
-      </li>
-    </ul>
-    <p>
-      By the way, this theme use the <a
-        target="_blank"
-        href="https://unocss.dev/">UnoCSS</a
-      > for style, it's fast.
-    </p>
-    <p>
-      Visit it
-      <a
-        target="_blank"
-        href="https://github.com/robert-schimanek/robertschimanek.com"
-      >
-        on GitHub
-      </a>
-      to fork the repository, read the docs or one-click deploy on Netlify.
-    </p>
-    <p>
-      If you like my work, please
-      <a target="_blank" href="https://github.com/robert-schimanek">
-        click follow
-      </a>
-      for me.
-    </p>
+    <div class="content-zoom p-4">
+      <h1 class="text-title">Beyond code.</h1>
+      <h2 class="text-2xl text-align-left font-bold">
+        Hi, I am Robert Schimanek, an Engineer and Developer who converts vague
+        specifications and unrealistic expectations into reliable processes and
+        products.
+      </h2>
+      <div class="accordion-cards-wrapper">
+        <ToolkitGroupAccordion toolkit={toolkitGroups} client:load />
+      </div>
+      <h3 class="text-2xl text-align-left font-bold">
+        Projects with a sustainable impact on people and businesses drive me. I
+        specialize in sustainable energy and advanced software/hardware
+        development, turning complex challenges cost-effective impact. I am
+        committed to contribute to a sustainable future through my expertise.
+        Check also my
+        <a href="/blog/publications" class="prose-link">publications</a> for more
+        details.
+      </h3>
+    </div>
+    <div class="expertise-cards-wrapper">
+      <ExpertiseSlider expertises={allExpertise} />
+    </div>
+
     <hr class="hr-line" />
-    <p>Find me on</p>
+    <h1 class="text-title text-align-left">
+      Ready to <span class="text-[#ff4438]">build greatness</span> together?
+    </h1>
+    <h3 class="text-2xl text-align-left font-bold">
+      Reach out via <a
+        class="prose-link"
+        aria-label={siteConfig.email}
+        href={`mailto:${siteConfig.email}`}
+      >
+        {siteConfig.email}
+      </a>
+
+      or on social media.
+    </h3>
+
     <p class="flex gap-x-4 gap-y-2 flex-wrap">
       {
         siteConfig.socialLinks.map((link) => (
@@ -86,15 +137,100 @@ import siteConfig from '@/site-config'
         ))
       }
     </p>
-    <p>
-      If you have any questions, please email me at
-      <a
-        prose-link
-        aria-label={siteConfig.email}
-        href={`mailto:${siteConfig.email}`}
-      >
-        {siteConfig.email}
-      </a>.
-    </p>
   </article>
 </BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const middleVideo = document.querySelector(
+      '.middle-video',
+    ) as HTMLVideoElement
+    const sideVideos = document.querySelectorAll(
+      '.side-video',
+    ) as NodeListOf<HTMLVideoElement>
+    const allVideos = document.querySelectorAll(
+      '.video-wrapper video',
+    ) as NodeListOf<HTMLVideoElement>
+
+    if (middleVideo) {
+      middleVideo.play()
+      middleVideo.addEventListener('canplay', () => {
+        sideVideos.forEach((video) => {
+          video.play()
+        })
+      })
+    }
+  })
+</script>
+
+<style>
+  .content-zoom {
+    max-width: 1000px;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+  }
+
+  .video-container {
+    width: 100vw;
+    max-width: 1600px;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    margin-top: -1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .video-wrapper {
+    display: flex;
+    width: 100%;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: auto;
+  }
+
+  .text-content {
+    padding: 0 20px; /* Add some padding to the text content */
+  }
+
+  .expertise-cards-wrapper {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .video-wrapper video {
+      width: 33.333%;
+    }
+  }
+
+  @media (min-width: 1000px) {
+    .content-zoom {
+      margin-left: max(calc(-50vw + 50%), calc(-500px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-500px + 50%));
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .video-container {
+      left: calc(50% - 800px);
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .video-wrapper video:(:hover) {
+    }
+
+    .expertise-cards-wrapper {
+      width: 1600px;
+      margin-left: max(calc(-50vw + 50%), calc(-800px + 50%));
+      margin-right: max(calc(-50vw + 50%), calc(-800px + 50%));
+    }
+  }
+</style>
