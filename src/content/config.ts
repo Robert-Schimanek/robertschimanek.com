@@ -35,7 +35,28 @@ const blog = defineCollection({
     tag: z.string().optional().optional(),
     redirect: z.string().optional(),
     video: z.boolean().default(false).optional(),
+    tech: z.array(z.string()).optional(),
   }),
 })
 
-export const collections = { pages, blog }
+const expertise = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string(),
+    description: z.string(),
+    expertiseGroup: z.string(),
+    mainImage: z.string(),
+    secondaryImage: z.string(),
+    personImage: z.string(),
+    duration: z.string(),
+    date: z.string().or(z.date()),
+    toolkit: z.array(z.object({
+      'header': z.string(),
+      'description': z.string(),
+      'tech-stack': z.array(z.string()),
+    })),
+    execSummary: z.string().optional(),
+  }),
+})
+
+export const collections = { pages, blog, expertise }
