@@ -1,9 +1,19 @@
 <script lang="ts" setup>
 import { useWindowScroll, useWindowSize } from '@vueuse/core'
-import { computed, onMounted, ref, unref } from 'vue'
+import { computed, nextTick, onMounted, ref, unref, watch } from 'vue'
 import ThemeToggle from './ThemeToggle.vue'
 import siteConfig from '@/site-config'
 import { getLinkTarget } from '@/utils/link'
+
+const props = defineProps<{
+  pageTitle: string
+}>()
+
+const currentPageTitle = ref(props.pageTitle)
+
+watch(() => props.pageTitle, (newTitle) => {
+  currentPageTitle.value = newTitle
+}, { immediate: true })
 
 const navLinks = siteConfig.header.navLinks || []
 
@@ -25,46 +35,22 @@ const socialLinks = computed(() => {
 const { y: scroll } = useWindowScroll()
 const { width } = useWindowSize()
 
-const showSecondLine = computed(() => {
-  const threshold = width.value < 640 ? 150 : 180 // 640px is typically used for 'sm' breakpoint
-  return scroll.value > threshold
-})
+const showSecondLine = ref(false)
+
+function updateShowSecondLine() {
+  const threshold = width.value < 640 ? 150 : 180
+  showSecondLine.value = scroll.value > threshold
+}
+
+watch([scroll, width], updateShowSecondLine)
 
 const oldScroll = ref(unref(scroll))
 
-const currentRouteName = ref('Page')
-
 let scrollPosition = 0
 
+const isNavDrawerOpen = ref(false)
+
 onMounted(() => {
-  const updateRouteName = () => {
-    const path = window.location.pathname
-    if (path === '/')
-      currentRouteName.value = 'Robert Schimanek'
-    else if (path.startsWith('/blog/expertise'))
-      currentRouteName.value = 'Expertise'
-    else if (path.includes('machine-learning'))
-      currentRouteName.value = 'Machine Learning'
-    else if (path.includes('data-science'))
-      currentRouteName.value = 'Data Science'
-    else if (path.includes('full-stack-development'))
-      currentRouteName.value = 'Full Stack Development'
-    else if (path.includes('data-visualization'))
-      currentRouteName.value = 'Data Visualization'
-    else if (path.startsWith('/blog/publications'))
-      currentRouteName.value = 'Publications'
-    else if (path.startsWith('/blog'))
-      currentRouteName.value = 'Blog'
-    else if (path.startsWith('/projects'))
-      currentRouteName.value = 'Projects'
-    else currentRouteName.value = 'Page'
-  }
-
-  updateRouteName()
-
-  // Update route name on navigation
-  window.addEventListener('popstate', updateRouteName)
-
   const navMask = document.querySelector('.nav-drawer-mask') as HTMLElement
 
   navMask?.addEventListener('touchmove', (event) => {
@@ -94,23 +80,20 @@ onMounted(() => {
       oldScroll.value = scroll.value
     }
   })
+
+  // Check initial scroll position
+  nextTick(() => {
+    updateShowSecondLine()
+  })
 })
 
 function toggleNavDrawer() {
+  isNavDrawerOpen.value = !isNavDrawerOpen.value
   const drawer = document.querySelector('.nav-drawer-top') as HTMLElement
   const mask = document.querySelector('.nav-drawer-top-mask') as HTMLElement
   if (!drawer || !mask)
     return
-  if (drawer.style.transform === `translateY(0%)`) {
-    drawer.style.transform = `translateY(-100%)`
-    mask.style.display = `none`
-    document.body.classList.remove('drawer-open')
-    document.body.style.position = ''
-    document.body.style.top = ''
-    document.body.style.width = ''
-    window.scrollTo(0, scrollPosition)
-  }
-  else {
+  if (isNavDrawerOpen.value) {
     scrollPosition = window.pageYOffset
     drawer.style.transform = `translateY(0%)`
     mask.style.display = `block`
@@ -118,6 +101,15 @@ function toggleNavDrawer() {
     document.body.style.position = 'fixed'
     document.body.style.top = `-${scrollPosition}px`
     document.body.style.width = '100%'
+  }
+  else {
+    drawer.style.transform = `translateY(-100%)`
+    mask.style.display = `none`
+    document.body.classList.remove('drawer-open')
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.width = ''
+    window.scrollTo(0, scrollPosition)
   }
 }
 </script>
@@ -161,8 +153,8 @@ function toggleNavDrawer() {
       :class="{ 'opacity-0': !showSecondLine, 'opacity-100': showSecondLine }"
     >
       <div class="flex items-center h-full">
-        <h1 class="text-lg font-semibold">
-          {{ currentRouteName }}
+        <h1 :class="{ 'text-lg font-semibold': currentPageTitle !== 'Robert Schimanek', 'lg:text-3xl text-2xl font-bold text-[#ff4438]': currentPageTitle === 'Robert Schimanek' }">
+          {{ currentPageTitle }}
         </h1>
       </div>
       <div class="flex gap-x-7 items-center">
@@ -175,40 +167,51 @@ function toggleNavDrawer() {
 
   <!-- Modified nav drawer to come from top -->
   <nav
+    v-show="isNavDrawerOpen"
     class="nav-drawer-top sm:hidden"
     style="view-transition-name: nav-drawer-top;"
   >
     <div class="nav-drawer-content">
-      <div class="nav-drawer-header">
-        <i class="custom-menu-icon-size i-heroicons-solid-x-mark" @click="toggleNavDrawer()" />
-      </div>
-      <div class="nav-drawer-links">
-        <a
-          nav-link
-          href="/"
-          class="home-link"
-          @click="toggleNavDrawer()"
-        >
-          Robert Schimanek
-        </a>
-        <a
-          v-for="link in navLinks"
-          :key="link.text"
-          :aria-label="`${link.text}`"
-          :target="getLinkTarget(link.href)"
-          nav-link
-          :href="link.href"
-          @click="toggleNavDrawer()"
-        >
-          {{ link.text }}
-        </a>
+      <div class="nav-drawer-inner">
+        <div class="nav-drawer-header">
+          <i class="custom-menu-icon-size i-heroicons-solid-x-mark" @click="toggleNavDrawer()" />
+        </div>
+        <div class="nav-drawer-links lg:gap-y-0 gap-y-5 lg:-mt-20 -mt-15">
+          <a
+            href="/"
+            class="nav-drawer-link"
+            :class="{ 'text-[#ff4438]': currentPageTitle === 'Robert Schimanek' }"
+            @click="toggleNavDrawer()"
+          >
+            <p class="lg:text-96px text-left text-40px font-extrabold">Robert Schimanek</p>
+          </a>
+          <a
+            v-for="link in navLinks"
+            :key="link.text"
+            :aria-label="`${link.text}`"
+            :target="getLinkTarget(link.href)"
+            :href="link.href"
+            class="nav-drawer-link"
+            :class="{ 'text-[#ff4438]': link.text === currentPageTitle }"
+            @click="toggleNavDrawer()"
+          >
+            <p class="lg:text-96px text-left text-40px font-extrabold">
+              {{ link.text }}
+            </p>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
-  <div class="nav-drawer-top-mask" @click="toggleNavDrawer()" />
+  <div v-show="isNavDrawerOpen" class="nav-drawer-top-mask" @click="toggleNavDrawer()" />
 </template>
 
 <style scoped>
+.header-vanish {
+  transform: translateY(-50%);
+  transition: 0s;
+}
+
 .custom-menu-icon-size {
   font-size: 1.5rem; /* or 22px */
   width: 1.5rem;
@@ -236,9 +239,17 @@ function toggleNavDrawer() {
 
 .nav-drawer-content {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  width: 100%;
   height: 100%;
   padding: 2rem;
+}
+
+.nav-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .nav-drawer-header {
@@ -253,7 +264,6 @@ function toggleNavDrawer() {
   align-items: flex-start;
   justify-content: top;
   flex-grow: 1;
-  gap: 1.5rem;
   padding-left: 1rem;
 }
 
@@ -277,5 +287,22 @@ function toggleNavDrawer() {
 
 :global(body.drawer-open) {
   overflow: hidden;
+}
+
+.nav-drawer-link {
+  transition: color 0.3s ease;
+  font-size: 5rem;
+}
+
+.nav-drawer-link:hover {
+  color: #ff4438;
+}
+
+.header-vanish {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition:
+    opacity 0s,
+    transform 0s;
 }
 </style>
