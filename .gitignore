@@ -5,3 +5,5 @@ node_modules
 .eslintcache
 *.log
 magnetic-feel-main
+inspo
+public/not_suited

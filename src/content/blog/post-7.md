@@ -1,5 +1,5 @@
 ---
-title: Blog Title
+title: The Future of AI in Healthcare
 description: You can set a duration to tell the viewer how long it will take to watch it。
 duration: 20min
 video: true
