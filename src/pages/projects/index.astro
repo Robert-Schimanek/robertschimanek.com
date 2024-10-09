@@ -6,14 +6,21 @@ import ListProjects from '@/components/ListProjects.vue'
 
 <BaseLayout title="Projects" description="List of projects that I am proud of">
   <h1 class="mb-10 text-title">Projects</h1>
+  <p mb-16>
+    Finalized and ongoing projects leverage the latest technologies. I develop
+    sophisticated hardware and software solutions for energy systems,
+    integrating hardware with advanced data analysis and machine learning, with
+    testing and successful deployment. From battery optimization to intelligent
+    energy management, my work accelerates the shift towards sustainability.
+  </p>
   <div mb-16 sm:mb-24>
     {
       projectData.length > 0 && (
         <div>
           {projectData.map((i) => (
             <div mb-10>
-              <h2 class="select-none relative h20 pointer-events-none">
-                <span class="text-3.2em color-transparent font-bold text-stroke-1.5 text-stroke-hex-aaa op35 dark:op20 absolute top-0 year-typography">
+              <h2 class="select-none relative mb-4 pointer-events-none">
+                <span class="text-3.2em color-transparent font-bold text-stroke-1.5 text-stroke-hex-aaa op35 dark:op20 top-0 year-typography">
                   {i.title}
                 </span>
               </h2>
