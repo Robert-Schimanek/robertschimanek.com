@@ -3,6 +3,7 @@ import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
 import UnoCSS from 'unocss/astro'
 import vue from '@astrojs/vue'
+import compress from 'astro-compress'
 
 export default defineConfig({
   site: 'https://robertschimanek.com/',
@@ -17,6 +18,14 @@ export default defineConfig({
       injectReset: true,
     }),
     vue(),
+    compress({
+      CSS: true,
+      HTML: false,
+      Image: true,
+      JavaScript: false,
+      SVG: false,
+      Map: false,
+    }),
   ],
   markdown: {
     shikiConfig: {
