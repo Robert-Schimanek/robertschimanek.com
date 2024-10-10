@@ -9,6 +9,7 @@ import MagneticBackground from '@/components/MagneticBackground.astro'
 
 const { ...head } = Astro.props
 const pageTitle = Astro.props.title
+const isBlogPost = Astro.props.isBlogPost || false
 ---
 
 <!doctype html>
@@ -74,6 +75,45 @@ const pageTitle = Astro.props.title
           if (youtubeLink) {
             event.preventDefault()
             window.open(youtubeLink, '_blank')
+          }
+        }
+      })
+    </script>
+    <script define:vars={{ isBlogPost }}>
+      document.addEventListener('astro:page-load', () => {
+        if (isBlogPost) {
+          const copyButtonLabel = 'Copy'
+          const codeBlocks = Array.from(document.querySelectorAll('pre'))
+
+          for (const codeBlock of codeBlocks) {
+            const wrapper = document.createElement('div')
+            wrapper.style.position = 'relative'
+
+            const copyButton = document.createElement('button')
+            copyButton.className = 'copy-code'
+            copyButton.innerHTML = copyButtonLabel
+
+            codeBlock.setAttribute('tabindex', '0')
+            codeBlock.appendChild(copyButton)
+            codeBlock.parentNode.insertBefore(wrapper, codeBlock)
+            wrapper.appendChild(codeBlock)
+
+            copyButton.addEventListener('click', async () => {
+              await copyCode(codeBlock, copyButton)
+            })
+          }
+
+          async function copyCode(block, button) {
+            const code = block.querySelector('code')
+            const text = code.innerText
+
+            await navigator.clipboard.writeText(text)
+
+            button.innerText = 'Copied!'
+
+            setTimeout(() => {
+              button.innerText = copyButtonLabel
+            }, 700)
           }
         }
       })

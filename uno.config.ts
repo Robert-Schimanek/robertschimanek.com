@@ -18,6 +18,7 @@ export default defineConfig({
       'text-link': 'text-dark dark:text-white ',
       'border-main': 'border-truegray-300 dark:border-truegray-600',
       'small-margin': 'px-4',
+      'copy-code': 'absolute top-2 right-2 p-1 text-xs rounded border-none cursor-pointer hover:bg-red-600 transition-colors duration-300',
     },
     {
       'text-title': 'text-link lg:text-7xl text-5xl lg:font-900 font-800 text-center',

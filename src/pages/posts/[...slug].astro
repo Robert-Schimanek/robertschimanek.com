@@ -27,7 +27,12 @@ function getDate(date: string) {
 }
 ---
 
-<BaseLayout title={title} description={description} pageType="article">
+<BaseLayout
+  title={title}
+  description={description}
+  pageType="article"
+  isBlogPost={true}
+>
   <article class="prose">
     <h1>{title}</h1>
     <p op-50>
