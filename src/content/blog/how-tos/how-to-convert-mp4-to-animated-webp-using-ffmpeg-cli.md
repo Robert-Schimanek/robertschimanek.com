@@ -1,8 +1,8 @@
 ---
 title: Convert MP4 to Animated WebP using FFmpeg CLI
 description: A comprehensive guide on how to convert MP4 files to animated WebP format using FFmpeg command-line tool, including maintaining aspect ratio and adjusting frame rate.
-date: 2024-03-15
-tag: Tutorial
+date: 2024-10-03
+tag: How-To
 ---
 
 FFmpeg is a powerful command-line tool for handling multimedia files. This guide will walk you through the process of converting MP4 videos to animated WebP images using FFmpeg, with updated information for 2024.
