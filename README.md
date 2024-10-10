@@ -1,3 +1,5 @@
+# Astro-based Personal Website
+
 [![Status](deploystatus)](pagelink)
 
 ## Preview
@@ -6,21 +8,48 @@
 
 ## Features
 
-- 100 / 100 Lighthouse performance.
-- Responsive.
-- SEO-friendly.
-- Light / Dark Theme.
-- Markdown support.
-- <a target="_blank" href="https://mdxjs.com/">MDX</a> (components in your markdown) support.
-- <a target="_blank" href="https://vuejs.org/">Vue</a> SFC component support.
-- Auto generated sitemap and RSS Feed <a target="_blank" href="https://vueuse.org/">VueUse</a> & <a target="_blank" href="https://lodash.com/">Lodash</a> support.
-- Use the <a target="_blank" href="https://unocss.dev/">UnoCSS</a> for style, it's fast.
+- 100/100 Lighthouse performance score
+- Responsive design for all devices
+- SEO-friendly structure
+- Smooth Light/Dark mode transitions
+- Markdown and MDX support for easy content creation
+- Vue.js integration for dynamic components
+- Automatic sitemap and RSS feed generation
+- UnoCSS for efficient styling
+- Built-in project and publication listing
+- Multi-language support
+- VueUse for composition utilities
+- Lodash for powerful data manipulation
+- Three.js powered magnetic background effect
 
 ## Lighthouse Performance
 
 ![Lighthouse Performance Image](./public/lighthouse.jpg)
 
-```
+## Key Components
+
+- **Responsive Image Slider**: Adapts to both large and small screens
+- **Dark Mode Toggle**: Implements smooth transitions between light and dark themes
+- **Copy Button for Code Blocks**: Enhances user experience in technical blog posts
+- **Optimized Image Loading**: Implements responsive images and lazy loading
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
+4. Build for production: `npm run build`
+
+## Customization
+
+- Update site configuration in `src/site-config.js`
+- Modify global styles in `src/styles/global.css`
+- Add or edit pages in the `src/pages` directory
+- Create blog posts in `src/content/blog`
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
