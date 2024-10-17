@@ -16,7 +16,7 @@ First, let's set up the basic HTML structure for our dark mode toggle:
 // DarkModeToggle.astro
 ---
 
-<button id="dark-mode-toggle" aria-label="Toggle dark mode">
+<button id="dark-mode-toggle" aria-label="Toggle dark mode" transition:persist>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -31,16 +31,9 @@ First, let's set up the basic HTML structure for our dark mode toggle:
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
 </button>
-
-<style>
-  #dark-mode-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-</style>
 ```
+
+Note the `transition:persist` attribute, which ensures our toggle persists across Astro's view transitions.
 
 ## Adding CSS for Dark Mode
 
@@ -59,11 +52,11 @@ Next, let's add some CSS to handle the dark mode styles. We'll use CSS variables
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition:
-    background-color var(--transition-duration) ease,
-    color var(--transition-duration) ease;
+  @apply bg-[var(--bg-color)] text-[var(--text-color)] transition-[background-color,color] duration-300 ease-in-out;
+}
+
+#dark-mode-toggle {
+  @apply bg-transparent border-none cursor-pointer p-0;
 }
 ```
 
@@ -83,6 +76,11 @@ document.addEventListener('astro:page-load', () => {
   if (savedTheme === 'dark' || (!savedTheme && prefersDarkMode))
     body.classList.add('dark-mode')
 
+  function updateToggleLabel() {
+    const isDarkMode = body.classList.contains('dark-mode')
+    darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode')
+  }
+
   darkModeToggle.addEventListener('click', () => {
     body.classList.toggle('dark-mode')
 
@@ -91,18 +89,13 @@ document.addEventListener('astro:page-load', () => {
       localStorage.setItem('theme', 'dark')
     else
       localStorage.setItem('theme', 'light')
+
+    updateToggleLabel()
   })
+
+  // Initial label update
+  updateToggleLabel()
 })
-```
-
-## Handling Page Transitions
-
-Astro uses view transitions for smooth page navigation. To ensure our dark mode persists across page transitions, we need to add a `transition:persist` directive to our toggle:
-
-```astro
-<button id="dark-mode-toggle" aria-label="Toggle dark mode" transition:persist>
-  <!-- Button content -->
-</button>
 ```
 
 ## Optimizing for Performance
@@ -120,27 +113,22 @@ To prevent a flash of unstyled content (FOUC) when the page loads, we can add a 
 </script>
 ```
 
-## Enhancing Accessibility
+## Breaking Down the Script
 
-To improve accessibility, let's update the toggle button to include an appropriate aria-label based on the current mode:
+Let's analyze the key components of our dark mode implementation:
 
-```javascript
-function updateToggleLabel() {
-  const isDarkMode = body.classList.contains('dark-mode')
-  darkModeToggle.setAttribute('aria-label', isDarkMode ? 'Switch to light mode' : 'Switch to dark mode')
-}
+1. **Event Listener**: We use `document.addEventListener('astro:page-load', ...)` to ensure our dark mode logic runs on every page load or navigation in Astro.
 
-darkModeToggle.addEventListener('click', () => {
-  // ... existing code ...
-  updateToggleLabel()
-})
+2. **Checking Saved Preferences**: We check for a saved theme preference in localStorage or fall back to the system preference using `window.matchMedia`.
 
-// Initial label update
-updateToggleLabel()
-```
+3. **Toggle Functionality**: The click event listener on the toggle button switches the theme by toggling the 'dark-mode' class and saves the preference to localStorage.
+
+4. **Accessibility Enhancement**: We update the `aria-label` of the toggle button based on the current mode, improving accessibility for screen reader users.
+
+5. **Performance Optimization**: The inline script in the `<head>` applies the correct theme immediately, preventing any flash of unstyled content.
 
 ## Conclusion
 
-Implementing a smooth dark mode transition in your Astro-based website enhances user experience and accessibility. By using CSS variables, leveraging Astro's view transitions, and considering performance and accessibility, you can create a seamless dark mode feature that your users will appreciate.
+By implementing this dark mode feature, you're providing a user-friendly, accessible, and performant solution for your Astro-based website. The smooth transitions between light and dark modes, coupled with persistent preferences across page loads, create a seamless experience for your users.
 
 Remember to test your implementation across different browsers and devices to ensure a consistent experience for all your users. Happy coding!
