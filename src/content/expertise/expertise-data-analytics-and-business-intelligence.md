@@ -1,9 +1,9 @@
 ---
-slug: data-analytics-&-bi
-title: Data Analytics & BI
+slug: data-analytics-and-business-intelligence
+title: Data Analytics and Business Intelligence
 subtitle: Transforming raw data into business value
 description: Leveraging data analytics and business intelligence tools to drive informed decision-making
-expertiseGroup: Data Science & Analytics
+expertiseGroup: Data Science and Analytics
 mainImage: /expertise-data-science-graph-mobile-development.webp
 secondaryImage: /expertise-money-from-data-science.webp
 personImage: /expertise-data-data-science-presentation.webp
@@ -45,7 +45,7 @@ execSummary: "Unlock the power of data with expert engineering and ETL solutions
 - Proficient in creating interactive dashboards and reports for data-driven decision making
 - Skilled in statistical analysis and data mining techniques
 
-## Key Areas of Data Analytics & BI:
+## Key Areas of Data Analytics and BI:
 
 **Descriptive Analytics**:
    - Analyze historical data to identify trends and patterns

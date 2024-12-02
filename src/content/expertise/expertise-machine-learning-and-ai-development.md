@@ -1,9 +1,9 @@
 ---
-slug: machine-learning-&-ai-development
-title: Machine Learning & AI
+slug: machine-learning-and-ai-development
+title: Machine Learning and AI
 subtitle: Harnessing the power of artificial intelligence and machine learning
 description: Developing intelligent systems that learn from data to solve complex problems
-expertiseGroup: Artificial Intelligence & Machine Learning
+expertiseGroup: Artificial Intelligence and Machine Learning
 mainImage: /ml-ai-model.webp
 secondaryImage: /expertise-the-game-of-data-science.webp
 personImage: /expertise-full-stack-image-two-screens.webp

@@ -1,9 +1,9 @@
 ---
-slug: data-engineering-&-etl
-title: Data Engineering & ETL
+slug: data-engineering-and-etl
+title: Data Engineering and ETL
 subtitle: Data handling, analysis, and presentation, with a focus on practical business applications.
 description: Data handling, analysis, and presentation, with a focus on practical business applications.
-expertiseGroup: Data Science & Analytics
+expertiseGroup: Data Science and Analytics
 mainImage: /Expertise-data-science-pipeline.webp
 secondaryImage: /expertise-data-engineering-presentation-table.webp
 personImage: /expertise-full-stack-image-two-screens.webp
