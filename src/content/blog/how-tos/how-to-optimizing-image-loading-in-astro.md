@@ -31,7 +31,7 @@ import myImage from '../assets/my-image.jpg'
   widths={[300, 600, 900]}
   sizes="(max-width: 900px) 100vw, 900px"
   alt="A description of my image"
-/>
+/>
 ```
 
 In this example:
@@ -49,7 +49,7 @@ Astro's `Image` component supports native lazy loading out of the box. Simply ad
   sizes="(max-width: 900px) 100vw, 900px"
   alt="A description of my image"
   loading="lazy"
-/>
+/>
 ```
 
 This tells the browser to defer loading off-screen images until the user scrolls near them.
@@ -65,7 +65,7 @@ For cases where you want to display different images based on screen size:
   <source media="(max-width: 799px)" srcset={mobileImage.src} />
   <source media="(min-width: 800px)" srcset={desktopImage.src} />
   <Image src={desktopImage} alt="A description of the image" />
-</picture>
+</picture>
 ```
 
 ### 2. Blur-up Technique
@@ -121,7 +121,7 @@ const blurredPlaceholder = await getImage({
       })
     })
   })
-</script>
+</script>
 ```
 
 This technique displays a small, blurred version of the image while the full-size image loads.

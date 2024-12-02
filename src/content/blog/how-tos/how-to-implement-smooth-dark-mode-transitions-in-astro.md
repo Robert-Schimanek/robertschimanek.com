@@ -30,7 +30,7 @@ First, let's set up the basic HTML structure for our dark mode toggle:
   >
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
   </svg>
-</button>
+</button>
 ```
 
 Note the `transition:persist` attribute, which ensures our toggle persists across Astro's view transitions.
@@ -57,7 +57,7 @@ body {
 
 #dark-mode-toggle {
   @apply bg-transparent border-none cursor-pointer p-0;
-}
+}
 ```
 
 ## Implementing the Dark Mode Toggle

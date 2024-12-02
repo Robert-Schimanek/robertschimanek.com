@@ -84,7 +84,7 @@ Next, let's style our slider to make it responsive:
 .slider {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
+}
 ```
 
 This CSS makes the slider responsive by adjusting the slide width based on screen size. It also implements smooth scrolling and hides the scrollbar for a cleaner look.
