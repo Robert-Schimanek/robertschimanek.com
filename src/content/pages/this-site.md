@@ -1,7 +1,7 @@
 ---
 title: This site
 image:
-  src: /kommanderlore_Data_Science_forms_raw_data_into_money_--ar_500_bda93deb-aa70-44be-8588-70ccf2741a46_1.webp
+  src: /android-chrome-512x512.webp
   alt: A visual representation of a data pipeline from raw data to insights.
 ---
 
