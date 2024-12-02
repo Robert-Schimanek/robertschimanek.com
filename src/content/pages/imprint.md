@@ -35,4 +35,4 @@ The contents and works created by Robert Schimanek on this site are subject to G
 Duplication, processing, distribution, or any form of commercialization of such material beyond the scope of the copyright law shall require prior written consent from the author.
 Downloads and copies of this site are only permitted for private, non-public, non-commercial use.
 
-Last updated: 30.09.2023
+Last updated: 02.12.2024
