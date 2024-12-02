@@ -36,9 +36,11 @@ import siteConfig from '@/site-config'
         <a :href="`mailto:${'info@robertschimanek.com'}`" class="break-all email-link hover:linker-hover-color">
           <p>info@robertschimanek.com</p>
         </a>
+        <!-- TODO: Add phone number
         <a :href="`tel:${'+4915122221214432'}`" class="break-all email-link hover:linker-hover-color">
           <p>+49 151 222 21 21 44 32</p>
         </a>
+        -->
       </div>
     </div>
 

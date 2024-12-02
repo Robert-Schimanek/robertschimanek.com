@@ -12,7 +12,7 @@ export const siteConfig = {
   socialLinks: [
     {
       text: 'GitHub',
-      href: 'https://github.com/Robert-Schimanek?tab=repositories',
+      href: 'https://github.com/Robert-Schimanek',
       icon: 'i-simple-icons-github',
       header: 'i-ri-github-line',
     },
@@ -21,11 +21,6 @@ export const siteConfig = {
       href: 'https://x.com/robertschimanek',
       icon: 'i-simple-icons-x',
       header: 'i-ri-twitter-x-line',
-    },
-    {
-      text: 'Xing',
-      href: 'https://www.xing.com/profile/Robert_Schimanek',
-      icon: 'i-simple-icons-xing',
     },
     {
       text: 'Linkedin',
